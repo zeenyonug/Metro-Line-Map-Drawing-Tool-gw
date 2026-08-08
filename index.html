@@ -16,6 +16,9 @@
   --bg-3: #1a1e2a;
   --accent: #f59e0b;
   --accent-2: #fb923c;
+  --accent-b: #8b5cf6;
+  --accent-c: #3b82f6;
+  --accent-d: #ef4444;
   --accent-glow: rgba(245,158,11,0.2);
   --text-hi: #f0f0f3;
   --text-mid: #8b8b96;
@@ -25,30 +28,54 @@
   --canvas-bg: #0a0d16;
   --grid: rgba(148,163,184,0.08);
 }
-* {
-  margin:0; padding:0; box-sizing:border-box;
-  -webkit-user-select:none; user-select:none;
-  -webkit-tap-highlight-color:transparent; -webkit-touch-callout:none;
-  outline:none; caret-color:transparent; touch-action:manipulation;
-  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-}
+* { margin:0;padding:0;box-sizing:border-box;
+  -webkit-user-select:none;user-select:none;
+  -webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;
+  outline:none;caret-color:transparent;touch-action:manipulation;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 ::selection { background:transparent; }
 ::-moz-selection { background:transparent; }
-img,svg { -webkit-user-drag:none; user-drag:none; pointer-events:none; }
+img,svg { -webkit-user-drag:none;user-drag:none;pointer-events:none; }
 html { scroll-behavior:smooth; }
 body {
   font-family:'Sora',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
   background:var(--bg-0); color:var(--text-hi);
   line-height:1.7; overflow-x:hidden;
   overflow-wrap:break-word; word-break:break-word;
+  position:relative;
 }
 .mono { font-family:'JetBrains Mono',monospace; }
 .serif { font-family:'Playfair Display',serif; }
 
-/* ===== 几何装饰背景 ===== */
-.geo-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
-.geo-bg svg { position:absolute; opacity:0.04; }
-.geo-line { position:absolute; background:var(--accent); opacity:0.06; }
+/* ===== 全局杂乱几何背景 ===== */
+.bg-layer {
+  position:fixed; inset:0; z-index:-1; overflow:hidden;
+  background:
+    radial-gradient(ellipse 800px 500px at 15% -5%, rgba(139,92,246,0.10), transparent 70%),
+    radial-gradient(ellipse 700px 600px at 85% 15%, rgba(245,158,11,0.09), transparent 70%),
+    radial-gradient(ellipse 900px 700px at 50% 100%, rgba(59,130,246,0.08), transparent 70%),
+    #080b14;
+}
+.bg-shape { position:absolute; pointer-events:none; }
+.bg-shape svg { display:block; }
+.bg-tri { opacity:0.06; }
+.bg-tri.a { color:var(--accent); }
+.bg-tri.b { color:var(--accent-b); }
+.bg-tri.c { color:var(--accent-c); }
+.bg-tri.d { color:var(--accent-d); }
+.bg-poly { opacity:0.05; }
+.bg-poly.a { color:var(--accent); }
+.bg-poly.b { color:var(--accent-b); }
+.bg-circle { opacity:0.05; }
+.bg-circle.a { color:var(--accent); }
+.bg-circle.b { color:var(--accent-c); }
+.bg-line { background:var(--accent); opacity:0.07; }
+.bg-line.b { background:var(--accent-b); }
+.bg-line.c { background:var(--accent-c); }
+.bg-dia { opacity:0.06; color:var(--accent); }
+
+/* ===== 分区内装饰几何层 ===== */
+.sec-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
 
 /* ===== NAV ===== */
 .nav { position:fixed; top:0; left:0; right:0; height:60px; padding:0 40px;
@@ -72,15 +99,10 @@ body {
 /* ===== HERO ===== */
 .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
   position:relative; padding:100px 40px 60px; overflow:hidden; }
-.hero-glow { position:absolute; inset:0;
+.hero-glow { position:absolute; inset:0; z-index:1;
   background:
-    radial-gradient(circle 500px at 50% 40%, rgba(245,158,11,0.08), transparent 70%),
-    radial-gradient(circle 400px at 20% 80%, rgba(251,146,60,0.05), transparent 70%); }
-/* 几何装饰 */
-.hero-deco { position:absolute; z-index:1; opacity:0.5; }
-.hero-deco.tl { top:80px; left:5%; }
-.hero-deco.br { bottom:40px; right:5%; }
-.hero-deco svg { width:120px; height:120px; color:var(--accent); opacity:0.08; }
+    radial-gradient(circle 520px at 50% 40%, rgba(245,158,11,0.10), transparent 70%),
+    radial-gradient(circle 380px at 20% 80%, rgba(139,92,246,0.08), transparent 70%); }
 .hero-logo { width:64px; height:64px; color:var(--accent); margin-bottom:28px; position:relative; z-index:2;
   animation:pulse 3s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{transform:scale(1);filter:drop-shadow(0 0 8px var(--accent-glow))} 50%{transform:scale(1.06);filter:drop-shadow(0 0 20px rgba(245,158,11,0.4))} }
@@ -127,31 +149,25 @@ body {
 
 /* ===== SECTIONS ===== */
 .sec { padding:120px 40px; position:relative; overflow:hidden; }
-.sec.dark { background:var(--bg-1); }
+.sec.dark { background:rgba(13,17,25,0.5); backdrop-filter:blur(2px); }
 .wrap { max-width:1080px; margin:0 auto; position:relative; z-index:2; }
 
-/* 杂志风编号 */
 .mag-num { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--accent);
   letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; white-space:nowrap; }
-
-/* 标签 */
 .tag { display:inline-flex; align-items:center; gap:7px; padding:6px 14px;
   background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); border-radius:999px;
   font-size:12px; font-weight:600; color:var(--accent); margin-bottom:18px; white-space:nowrap; }
 .tag svg { width:13px; height:13px; }
 
-/* 标题 */
 .sec-title { font-size:clamp(26px,3.5vw,38px); font-weight:700; letter-spacing:-0.02em; line-height:1.25;
   max-width:600px; margin:0 auto 16px; text-align:center; white-space:normal; }
 .sec-desc { font-size:16px; color:var(--text-mid); line-height:1.8; max-width:560px; margin:0 auto;
   text-align:center; white-space:normal; }
 .center-head { text-align:center; margin-bottom:56px; }
 
-/* 两栏 */
 .split { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; max-width:1080px; margin:0 auto; position:relative; z-index:2; }
 .split-r { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; max-width:1080px; margin:0 auto; position:relative; z-index:2; }
 
-/* 卡片 */
 .card { background:var(--bg-2); border:1px solid var(--border); border-radius:12px;
   padding:24px; transition:.3s; position:relative; }
 .card:hover { border-color:rgba(245,158,11,0.3); transform:translateY(-3px); box-shadow:0 16px 40px -20px rgba(0,0,0,0.5); }
@@ -161,7 +177,6 @@ body {
 .card h3 { font-size:16px; font-weight:600; margin-bottom:8px; }
 .card p { font-size:14px; color:var(--text-mid); line-height:1.7; white-space:normal; }
 
-/* 线型行 */
 .type-row { display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid var(--border); }
 .type-row:last-child { border-bottom:none; }
 .type-label { font-size:13px; color:var(--text-mid); width:90px; font-weight:500; white-space:nowrap; }
@@ -174,10 +189,8 @@ body {
 .type-line.hollow::after { content:''; position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); height:2px; background:var(--bg-1); }
 .type-line.dashed { background:repeating-linear-gradient(90deg,var(--accent) 0 10px,transparent 10px 16px); }
 
-/* 功能网格 3x2 */
 .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1080px; margin:0 auto; }
 
-/* ===== 工作流程（替换原主题板块） ===== */
 .flow { display:grid; grid-template-columns:repeat(3,1fr); gap:0; max-width:900px; margin:0 auto; position:relative; }
 .flow-step { text-align:center; padding:32px 24px; position:relative; }
 .flow-step::after { content:''; position:absolute; top:50%; right:-12px; width:24px; height:1px; background:var(--border-hi); }
@@ -191,14 +204,12 @@ body {
 .flow-step h3 { font-size:15px; font-weight:600; margin-bottom:8px; }
 .flow-step p { font-size:13px; color:var(--text-mid); line-height:1.6; white-space:normal; }
 
-/* ===== 几何分割线 ===== */
 .geo-divider { display:flex; align-items:center; justify-content:center; gap:8px; margin:0 auto; max-width:200px; }
 .geo-divider span { display:block; }
 .geo-divider .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; }
 .geo-divider .line { flex:1; height:1px; background:var(--border-hi); }
 .geo-divider .diamond { width:8px; height:8px; background:var(--accent); transform:rotate(45deg); }
 
-/* ===== FOOTER ===== */
 .footer { padding:60px 40px 40px; border-top:1px solid var(--border); text-align:center; position:relative; overflow:hidden; }
 .footer-brand { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:20px; font-weight:600; }
 .footer-brand svg { width:24px; height:24px; color:var(--accent); }
@@ -209,7 +220,6 @@ body {
 .footer-copy { color:var(--text-lo); font-size:13px; padding-top:20px; border-top:1px solid var(--border); display:inline-block; padding-left:32px; padding-right:32px; }
 .footer-copy a { color:var(--accent); text-decoration:none; }
 
-/* ===== ANIMATIONS ===== */
 .rv { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
 .rv-l { opacity:0; transform:translateX(-40px); transition:opacity .7s ease, transform .7s ease; }
 .rv-r { opacity:0; transform:translateX(40px); transition:opacity .7s ease, transform .7s ease; }
@@ -219,18 +229,90 @@ body {
 .rv-rl { opacity:0; transform:perspective(800px) rotateX(8deg); transition:opacity .8s ease, transform .8s ease; }
 .go.rv,.go.rv-l,.go.rv-r,.go.rv-s,.go.rv-bl,.go.rv-fl,.go.rv-rl { opacity:1; transform:none; filter:none; }
 
-/* ===== RESPONSIVE ===== */
 @media(max-width:900px){ .grid3{grid-template-columns:repeat(2,1fr)} .flow{grid-template-columns:1fr;gap:24px} .flow-step::after{display:none} }
 @media(max-width:768px){
   .nav{padding:0 16px} .nav-logo span{display:none} .nav-r a:not(.nav-cta){display:none}
   .split,.split-r{grid-template-columns:1fr;gap:40px}
   .em-left{display:none} .sec{padding:80px 20px} .hero{padding:100px 20px 40px}
-  .hero-deco{display:none}
 }
 @media(max-width:560px){ .grid3{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
+
+<!-- 全局固定背景：杂乱几何图形 -->
+<div class="bg-layer" aria-hidden="true">
+  <!-- 三角形（随机颜色+旋转+位置）-->
+  <div class="bg-shape bg-tri a" style="top:2%;left:4%;width:180px;transform:rotate(15deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
+  <div class="bg-shape bg-tri b" style="top:18%;right:8%;width:120px;transform:rotate(-25deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
+  <div class="bg-shape bg-tri c" style="top:35%;left:2%;width:100px;transform:rotate(60deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,50 95,5 95,95"/></svg></div>
+  <div class="bg-shape bg-tri d" style="top:55%;right:2%;width:150px;transform:rotate(-10deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
+  <div class="bg-shape bg-tri a" style="top:72%;left:10%;width:140px;transform:rotate(-50deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,95 95,95 50,5"/></svg></div>
+  <div class="bg-shape bg-tri b" style="top:88%;right:15%;width:110px;transform:rotate(40deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
+  <div class="bg-shape bg-tri c" style="top:8%;left:40%;width:90px;transform:rotate(110deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,5 95,5 50,95"/></svg></div>
+  <div class="bg-shape bg-tri d" style="top:42%;left:85%;width:85px;transform:rotate(-70deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
+  <div class="bg-shape bg-tri a" style="top:62%;left:55%;width:95px;transform:rotate(150deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,50 95,5 95,95"/></svg></div>
+  <div class="bg-shape bg-tri b" style="top:25%;left:70%;width:75px;transform:rotate(-140deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,95 5,5 95,5"/></svg></div>
+  <div class="bg-shape bg-tri c" style="top:78%;right:35%;width:125px;transform:rotate(30deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
+  <div class="bg-shape bg-tri d" style="top:32%;left:20%;width:70px;transform:rotate(-90deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,95 95,95 50,5"/></svg></div>
+
+  <!-- 多边形（五边/六边/八边形） -->
+  <div class="bg-shape bg-poly a" style="top:10%;right:25%;width:130px;transform:rotate(20deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,40 78,95 22,95 5,40"/></svg></div>
+  <div class="bg-shape bg-poly b" style="top:48%;left:15%;width:110px;transform:rotate(-15deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,3 90,27 90,73 50,97 10,73 10,27"/></svg></div>
+  <div class="bg-shape bg-poly a" style="top:82%;left:45%;width:95px;transform:rotate(60deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 90,35 75,85 25,85 10,35"/></svg></div>
+  <div class="bg-shape bg-poly b" style="top:22%;left:12%;width:80px;transform:rotate(-45deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,10 80,30 90,65 70,90 30,90 10,65 20,30"/></svg></div>
+
+  <!-- 圆形（空心/实心） -->
+  <div class="bg-shape bg-circle a" style="top:5%;left:80%;width:160px">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1"><circle cx="50" cy="50" r="48"/></svg></div>
+  <div class="bg-shape bg-circle b" style="top:40%;right:30%;width:100px">
+    <svg viewBox="0 0 100 100" fill="currentColor" opacity="0.6"><circle cx="50" cy="50" r="20"/></svg></div>
+  <div class="bg-shape bg-circle a" style="top:65%;left:30%;width:140px">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.7"><circle cx="50" cy="50" r="48"/><circle cx="50" cy="50" r="35"/><circle cx="50" cy="50" r="20"/></svg></div>
+  <div class="bg-shape bg-circle b" style="top:92%;left:5%;width:90px">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1"><circle cx="50" cy="50" r="48"/></svg></div>
+  <div class="bg-shape bg-circle a" style="top:30%;left:50%;width:70px">
+    <svg viewBox="0 0 100 100" fill="currentColor" opacity="0.5"><circle cx="50" cy="50" r="30"/></svg></div>
+
+  <!-- 线条 -->
+  <div class="bg-shape bg-line" style="top:15%;left:0;width:220px;height:1px;transform:rotate(-8deg)"></div>
+  <div class="bg-shape bg-line b" style="top:38%;right:0;width:280px;height:1px;transform:rotate(12deg)"></div>
+  <div class="bg-shape bg-line c" style="top:60%;left:0;width:180px;height:1px;transform:rotate(5deg)"></div>
+  <div class="bg-shape bg-line" style="top:85%;right:0;width:320px;height:1px;transform:rotate(-15deg)"></div>
+  <div class="bg-shape bg-line b" style="top:50%;left:5%;width:1px;height:180px;transform:rotate(20deg)"></div>
+  <div class="bg-shape bg-line c" style="top:70%;right:10%;width:1px;height:220px;transform:rotate(-10deg)"></div>
+  <div class="bg-shape bg-line" style="top:20%;left:50%;width:1px;height:120px;transform:rotate(45deg)"></div>
+
+  <!-- 菱形 -->
+  <div class="bg-shape bg-dia" style="top:12%;left:60%;width:60px;transform:rotate(45deg)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,10 90,50 50,90 10,50"/></svg></div>
+  <div class="bg-shape bg-dia" style="top:55%;right:18%;width:50px;transform:rotate(0deg);opacity:0.04;color:var(--accent-b)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,50 50,95 5,50"/></svg></div>
+  <div class="bg-shape bg-dia" style="top:80%;left:25%;width:45px;transform:rotate(30deg);opacity:0.05;color:var(--accent-c)">
+    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,10 90,50 50,90 10,50"/></svg></div>
+
+  <!-- 方格对角线装饰 -->
+  <div class="bg-shape" style="top:45%;left:0;width:140px;height:140px;opacity:0.04;color:var(--accent)">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="5" y="5" width="90" height="90"/><line x1="5" y1="5" x2="95" y2="95"/><line x1="95" y1="5" x2="5" y2="95"/></svg></div>
+  <div class="bg-shape" style="top:75%;right:0;width:120px;height:120px;opacity:0.04;color:var(--accent-b)">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="5" y="5" width="90" height="90"/><rect x="25" y="25" width="50" height="50"/><rect x="40" y="40" width="20" height="20"/></svg></div>
+</div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -255,9 +337,6 @@ body {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
-  <!-- 几何装饰 -->
-  <div class="hero-deco tl"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><polygon points="50,5 95,50 50,95 5,50"/><polygon points="50,20 80,50 50,80 20,50"/><circle cx="50" cy="50" r="15"/></svg></div>
-  <div class="hero-deco br"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="10" y="10" width="80" height="80"/><rect x="25" y="25" width="50" height="50"/><rect x="40" y="40" width="20" height="20"/><line x1="10" y1="10" x2="90" y2="90"/><line x1="90" y1="10" x2="10" y2="90"/></svg></div>
 
   <svg class="hero-logo" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/></svg>
   <h1 data-i18n="heroTitle">绘制你的<span class="ac">地铁世界</span></h1>
@@ -267,7 +346,6 @@ body {
     <span data-i18n="heroCta">立即体验</span>
   </a>
 
-  <!-- 真实编辑器复刻 -->
   <div class="editor-mock rv-s">
     <div class="em-topbar">
       <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg></button>
@@ -309,6 +387,12 @@ body {
 
 <!-- SECTION 1: 站点工具 -->
 <section class="sec" id="feat">
+  <div class="sec-bg">
+    <div class="bg-shape bg-tri a" style="top:10%;left:-3%;width:180px;transform:rotate(-20deg);opacity:0.08">
+      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
+    <div class="bg-shape bg-circle b" style="bottom:8%;right:2%;width:160px">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1" opacity="0.08"><circle cx="50" cy="50" r="48"/></svg></div>
+  </div>
   <div class="split">
     <div class="rv-l">
       <div class="mag-num">01 / 04</div>
@@ -339,11 +423,16 @@ body {
   </div>
 </section>
 
-<!-- 几何分割线 -->
 <div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
 
 <!-- SECTION 2: 线路工具 -->
 <section class="sec dark">
+  <div class="sec-bg">
+    <div class="bg-shape bg-poly b" style="top:15%;right:-2%;width:180px;transform:rotate(35deg);opacity:0.06">
+      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,40 78,95 22,95 5,40"/></svg></div>
+    <div class="bg-shape bg-dia" style="bottom:12%;left:3%;width:70px;transform:rotate(30deg);opacity:0.05;color:var(--accent)">
+      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,10 90,50 50,90 10,50"/></svg></div>
+  </div>
   <div class="split-r">
     <div class="rv-fl">
       <div class="editor-mock" style="max-width:none;margin:0">
@@ -375,11 +464,15 @@ body {
   </div>
 </section>
 
-<!-- 几何分割线 -->
 <div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
 
 <!-- SECTION 3: 线路类型 -->
 <section class="sec">
+  <div class="sec-bg">
+    <div class="bg-shape bg-tri c" style="top:-5%;left:35%;width:160px;transform:rotate(75deg);opacity:0.06">
+      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,50 95,5 95,95"/></svg></div>
+    <div class="bg-shape bg-line b" style="bottom:20%;right:8%;width:200px;height:1px;transform:rotate(-18deg);opacity:0.1"></div>
+  </div>
   <div class="wrap">
     <div class="center-head">
       <div class="mag-num rv" style="text-align:center">03 / 04</div>
@@ -403,11 +496,16 @@ body {
   </div>
 </section>
 
-<!-- 几何分割线 -->
 <div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
 
-<!-- SECTION 4: 工作流程（替换原主题板块） -->
+<!-- SECTION 4: 工作流程 -->
 <section class="sec dark" id="flow">
+  <div class="sec-bg">
+    <div class="bg-shape bg-circle a" style="top:-8%;right:-3%;width:280px">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.08"><circle cx="50" cy="50" r="48"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="18"/></svg></div>
+    <div class="bg-shape bg-tri d" style="bottom:10%;left:-3%;width:200px;transform:rotate(25deg);opacity:0.06">
+      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,95 5,5 95,5"/></svg></div>
+  </div>
   <div class="wrap" style="max-width:900px">
     <div class="center-head">
       <div class="mag-num rv" style="text-align:center">04 / 04</div>
@@ -440,6 +538,12 @@ body {
 
 <!-- SECTION 5: 导出 -->
 <section class="sec" id="export">
+  <div class="sec-bg">
+    <div class="bg-shape bg-poly a" style="top:8%;left:-2%;width:160px;transform:rotate(-30deg);opacity:0.06">
+      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 90,35 75,85 25,85 10,35"/></svg></div>
+    <div class="bg-shape" style="bottom:10%;right:5%;width:130px;height:130px;opacity:0.05;color:var(--accent-c)">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="10" y="10" width="80" height="80"/><rect x="25" y="25" width="50" height="50"/><line x1="10" y1="10" x2="90" y2="90"/><line x1="90" y1="10" x2="10" y2="90"/></svg></div>
+  </div>
   <div class="wrap">
     <div class="center-head">
       <div class="mag-num rv" style="text-align:center">EXPORT</div>
@@ -469,6 +573,11 @@ body {
 
 <!-- 功能汇总 -->
 <section class="sec dark">
+  <div class="sec-bg">
+    <div class="bg-shape bg-tri b" style="top:15%;right:-2%;width:180px;transform:rotate(40deg);opacity:0.06">
+      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
+    <div class="bg-shape bg-line" style="bottom:30%;left:10%;width:260px;height:1px;transform:rotate(10deg);opacity:0.08"></div>
+  </div>
   <div class="wrap">
     <div class="center-head">
       <div class="mag-num rv" style="text-align:center">MORE</div>
@@ -488,6 +597,10 @@ body {
 
 <!-- FOOTER -->
 <footer class="footer">
+  <div class="sec-bg">
+    <div class="bg-shape bg-circle b" style="top:-40%;left:50%;transform:translateX(-50%);width:600px">
+      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.05"><circle cx="50" cy="50" r="48"/><circle cx="50" cy="50" r="35"/><circle cx="50" cy="50" r="22"/></svg></div>
+  </div>
   <div class="footer-brand">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>
     <span data-i18n="footerBrand">地铁线路图绘制工具</span>
@@ -555,7 +668,6 @@ function applyLang(l){
 }
 document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
 
-// Hero 编辑器动画
 (function(){
   const line=document.getElementById('demoLine');
   const st=document.querySelectorAll('.demo-station');
@@ -568,12 +680,10 @@ document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=
   setTimeout(()=>requestAnimationFrame(a),1000);
 })();
 
-// NAV 滚动隐藏
 const nav=document.getElementById('nav');let ls=0;
 window.addEventListener('scroll',()=>{const c=window.scrollY;
   nav.style.transform=(c>100&&c>ls)?'translateY(-100%)':'translateY(0)';ls=c;},{passive:true});
 
-// 入场动画
 const els=document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s,.rv-bl,.rv-fl,.rv-rl');
 const ob=new IntersectionObserver(es=>{es.forEach(e=>{
   if(e.isIntersecting&&e.intersectionRatio>=0.25){
@@ -583,7 +693,6 @@ const ob=new IntersectionObserver(es=>{es.forEach(e=>{
 });},{threshold:0.25});
 els.forEach(e=>ob.observe(e));
 
-// Section2 站点动画
 const sv2=document.getElementById('stationSvg2');
 if(sv2){const ob2=new IntersectionObserver(es=>{es.forEach(e=>{
   if(e.isIntersecting&&e.intersectionRatio>=0.25){
@@ -591,7 +700,6 @@ if(sv2){const ob2=new IntersectionObserver(es=>{es.forEach(e=>{
   }
 });},{threshold:0.3});ob2.observe(sv2);}
 
-// 禁用
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('copy',e=>e.preventDefault());
 document.addEventListener('cut',e=>e.preventDefault());
