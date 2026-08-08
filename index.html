@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f59e0b'><circle cx='8' cy='8' r='5'/><circle cx='8' cy='8' r='2' fill='white'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg-0: #080b14;
@@ -24,8 +24,6 @@
   --border-hi: rgba(255,255,255,0.12);
   --canvas-bg: #0a0d16;
   --grid: rgba(148,163,184,0.08);
-  --radius: 12px;
-  --radius-sm: 8px;
 }
 * {
   margin:0; padding:0; box-sizing:border-box;
@@ -45,11 +43,17 @@ body {
   overflow-wrap:break-word; word-break:break-word;
 }
 .mono { font-family:'JetBrains Mono',monospace; }
+.serif { font-family:'Playfair Display',serif; }
+
+/* ===== 几何装饰背景 ===== */
+.geo-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+.geo-bg svg { position:absolute; opacity:0.04; }
+.geo-line { position:absolute; background:var(--accent); opacity:0.06; }
 
 /* ===== NAV ===== */
 .nav { position:fixed; top:0; left:0; right:0; height:60px; padding:0 40px;
   display:flex; align-items:center; justify-content:space-between;
-  background:rgba(8,11,20,0.6); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  background:rgba(8,11,20,0.7); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border); z-index:1000; transition:transform .35s ease; }
 .nav-l { display:flex; align-items:center; gap:24px; }
 .nav-logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:15px; }
@@ -72,6 +76,11 @@ body {
   background:
     radial-gradient(circle 500px at 50% 40%, rgba(245,158,11,0.08), transparent 70%),
     radial-gradient(circle 400px at 20% 80%, rgba(251,146,60,0.05), transparent 70%); }
+/* 几何装饰 */
+.hero-deco { position:absolute; z-index:1; opacity:0.5; }
+.hero-deco.tl { top:80px; left:5%; }
+.hero-deco.br { bottom:40px; right:5%; }
+.hero-deco svg { width:120px; height:120px; color:var(--accent); opacity:0.08; }
 .hero-logo { width:64px; height:64px; color:var(--accent); margin-bottom:28px; position:relative; z-index:2;
   animation:pulse 3s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{transform:scale(1);filter:drop-shadow(0 0 8px var(--accent-glow))} 50%{transform:scale(1.06);filter:drop-shadow(0 0 20px rgba(245,158,11,0.4))} }
@@ -86,7 +95,7 @@ body {
 .hero-btn:hover { background:var(--accent-2); box-shadow:0 8px 30px -8px rgba(245,158,11,0.5); transform:translateY(-2px); }
 .hero-btn svg { pointer-events:auto; }
 
-/* ===== EDITOR MOCK (真实编辑器复刻) ===== */
+/* ===== EDITOR MOCK ===== */
 .editor-mock { width:100%; max-width:960px; margin:56px auto 0; position:relative; z-index:2;
   border-radius:14px; overflow:hidden; border:1px solid var(--border-hi);
   box-shadow:0 40px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset; }
@@ -117,28 +126,34 @@ body {
   border-top:1px solid var(--border); display:flex; align-items:center; padding:0 12px; font-size:11px; color:var(--text-lo); }
 
 /* ===== SECTIONS ===== */
-.sec { padding:120px 40px; }
+.sec { padding:120px 40px; position:relative; overflow:hidden; }
 .sec.dark { background:var(--bg-1); }
-.wrap { max-width:1080px; margin:0 auto; }
+.wrap { max-width:1080px; margin:0 auto; position:relative; z-index:2; }
 
-/* 标签+标题（居中） */
-.center-head { text-align:center; margin-bottom:56px; }
+/* 杂志风编号 */
+.mag-num { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--accent);
+  letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; white-space:nowrap; }
+
+/* 标签 */
 .tag { display:inline-flex; align-items:center; gap:7px; padding:6px 14px;
   background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); border-radius:999px;
   font-size:12px; font-weight:600; color:var(--accent); margin-bottom:18px; white-space:nowrap; }
 .tag svg { width:13px; height:13px; }
+
+/* 标题 */
 .sec-title { font-size:clamp(26px,3.5vw,38px); font-weight:700; letter-spacing:-0.02em; line-height:1.25;
   max-width:600px; margin:0 auto 16px; text-align:center; white-space:normal; }
 .sec-desc { font-size:16px; color:var(--text-mid); line-height:1.8; max-width:560px; margin:0 auto;
   text-align:center; white-space:normal; }
+.center-head { text-align:center; margin-bottom:56px; }
 
-/* 两栏布局 */
-.split { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; max-width:1080px; margin:0 auto; }
-.split-r { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; max-width:1080px; margin:0 auto; }
+/* 两栏 */
+.split { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; max-width:1080px; margin:0 auto; position:relative; z-index:2; }
+.split-r { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; max-width:1080px; margin:0 auto; position:relative; z-index:2; }
 
-/* 卡片块 */
-.card { background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius);
-  padding:24px; transition:.3s; }
+/* 卡片 */
+.card { background:var(--bg-2); border:1px solid var(--border); border-radius:12px;
+  padding:24px; transition:.3s; position:relative; }
 .card:hover { border-color:rgba(245,158,11,0.3); transform:translateY(-3px); box-shadow:0 16px 40px -20px rgba(0,0,0,0.5); }
 .card-icon { width:40px; height:40px; display:flex; align-items:center; justify-content:center;
   background:rgba(245,158,11,0.1); border-radius:8px; color:var(--accent); margin-bottom:16px; }
@@ -159,22 +174,32 @@ body {
 .type-line.hollow::after { content:''; position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); height:2px; background:var(--bg-1); }
 .type-line.dashed { background:repeating-linear-gradient(90deg,var(--accent) 0 10px,transparent 10px 16px); }
 
-/* 主题色块 */
-.swatches { display:flex; gap:20px; justify-content:center; margin-top:40px; flex-wrap:wrap; }
-.sw { width:130px; height:84px; border-radius:10px; border:1px solid var(--border-hi);
-  display:flex; align-items:flex-end; justify-content:center; padding-bottom:8px;
-  font-size:12px; font-weight:600; transition:.3s; white-space:nowrap;
-  box-shadow:0 8px 20px -12px rgba(0,0,0,0.5); }
-.sw:hover { transform:translateY(-4px); border-color:var(--accent); }
-.sw.white { background:#f8fafc; color:#475569; }
-.sw.dark { background:#0c1222; color:#94a3b8; }
-.sw.black { background:#000; color:#71717a; }
-
 /* 功能网格 3x2 */
 .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1080px; margin:0 auto; }
 
+/* ===== 工作流程（替换原主题板块） ===== */
+.flow { display:grid; grid-template-columns:repeat(3,1fr); gap:0; max-width:900px; margin:0 auto; position:relative; }
+.flow-step { text-align:center; padding:32px 24px; position:relative; }
+.flow-step::after { content:''; position:absolute; top:50%; right:-12px; width:24px; height:1px; background:var(--border-hi); }
+.flow-step:last-child::after { display:none; }
+.flow-num { font-family:'Playfair Display',serif; font-size:48px; font-weight:900; color:var(--accent);
+  opacity:0.15; line-height:1; margin-bottom:12px; }
+.flow-icon { width:48px; height:48px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--border-hi); border-radius:50%; color:var(--accent); position:relative; }
+.flow-icon svg { width:20px; height:20px; }
+.flow-icon::before { content:''; position:absolute; inset:-4px; border:1px solid var(--border); border-radius:50%; opacity:0.5; }
+.flow-step h3 { font-size:15px; font-weight:600; margin-bottom:8px; }
+.flow-step p { font-size:13px; color:var(--text-mid); line-height:1.6; white-space:normal; }
+
+/* ===== 几何分割线 ===== */
+.geo-divider { display:flex; align-items:center; justify-content:center; gap:8px; margin:0 auto; max-width:200px; }
+.geo-divider span { display:block; }
+.geo-divider .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; }
+.geo-divider .line { flex:1; height:1px; background:var(--border-hi); }
+.geo-divider .diamond { width:8px; height:8px; background:var(--accent); transform:rotate(45deg); }
+
 /* ===== FOOTER ===== */
-.footer { padding:60px 40px 40px; border-top:1px solid var(--border); text-align:center; }
+.footer { padding:60px 40px 40px; border-top:1px solid var(--border); text-align:center; position:relative; overflow:hidden; }
 .footer-brand { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:20px; font-weight:600; }
 .footer-brand svg { width:24px; height:24px; color:var(--accent); }
 .footer-links { display:flex; justify-content:center; gap:32px; margin-bottom:28px; flex-wrap:wrap; }
@@ -191,17 +216,18 @@ body {
 .rv-s { opacity:0; transform:scale(.92); transition:opacity .7s ease, transform .7s ease; }
 .rv-bl { opacity:0; filter:blur(12px); transition:opacity .8s ease, filter .8s ease; }
 .rv-fl { opacity:0; transform:perspective(800px) rotateY(-8deg); transition:opacity .8s ease, transform .8s ease; }
-.go.rv,.go.rv-l,.go.rv-r,.go.rv-s,.go.rv-bl,.go.rv-fl { opacity:1; transform:none; filter:none; }
+.rv-rl { opacity:0; transform:perspective(800px) rotateX(8deg); transition:opacity .8s ease, transform .8s ease; }
+.go.rv,.go.rv-l,.go.rv-r,.go.rv-s,.go.rv-bl,.go.rv-fl,.go.rv-rl { opacity:1; transform:none; filter:none; }
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:900px){ .grid3{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:900px){ .grid3{grid-template-columns:repeat(2,1fr)} .flow{grid-template-columns:1fr;gap:24px} .flow-step::after{display:none} }
 @media(max-width:768px){
   .nav{padding:0 16px} .nav-logo span{display:none} .nav-r a:not(.nav-cta){display:none}
   .split,.split-r{grid-template-columns:1fr;gap:40px}
   .em-left{display:none} .sec{padding:80px 20px} .hero{padding:100px 20px 40px}
-  .hero-btn{flex-direction:column;align-items:center}
+  .hero-deco{display:none}
 }
-@media(max-width:560px){ .grid3{grid-template-columns:1fr} .sw{width:100%} }
+@media(max-width:560px){ .grid3{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -220,7 +246,7 @@ body {
   </div>
   <div class="nav-r">
     <a href="#feat" data-i18n="navFeat">功能</a>
-    <a href="#theme" data-i18n="navTheme">主题</a>
+    <a href="#flow" data-i18n="navFlow">流程</a>
     <a href="#export" data-i18n="navExport">导出</a>
     <a href="https://zeenyonug.github.io/Metro-Line-Map-Drawing-Tool/" target="_blank" class="nav-cta" data-i18n="navTry">立即体验</a>
   </div>
@@ -229,6 +255,10 @@ body {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
+  <!-- 几何装饰 -->
+  <div class="hero-deco tl"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><polygon points="50,5 95,50 50,95 5,50"/><polygon points="50,20 80,50 50,80 20,50"/><circle cx="50" cy="50" r="15"/></svg></div>
+  <div class="hero-deco br"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="10" y="10" width="80" height="80"/><rect x="25" y="25" width="50" height="50"/><rect x="40" y="40" width="20" height="20"/><line x1="10" y1="10" x2="90" y2="90"/><line x1="90" y1="10" x2="10" y2="90"/></svg></div>
+
   <svg class="hero-logo" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/></svg>
   <h1 data-i18n="heroTitle">绘制你的<span class="ac">地铁世界</span></h1>
   <p data-i18n="heroSub">零依赖、零注册，开箱即用的在线地铁线路图绘制工具</p>
@@ -253,45 +283,25 @@ body {
       <button class="em-export" data-i18n="export">导出</button>
     </div>
     <div class="em-body">
-      <!-- 左侧属性面板 -->
       <div class="em-left">
         <div class="em-lh" data-i18n="props">属性面板</div>
-        <div class="em-prop">
-          <label data-i18n="name">名称</label>
-          <input class="em-input" value="1号线" readonly>
-        </div>
-        <div class="em-prop">
-          <label data-i18n="color">颜色</label>
-          <div class="em-color-row">
-            <div class="em-color" style="background:#ef4444"></div>
-            <input class="em-input" value="#ef4444" readonly style="flex:1">
-          </div>
-        </div>
-        <div class="em-prop">
-          <label data-i18n="lineType">线型</label>
-          <input class="em-input" value="普通实线" readonly>
-        </div>
+        <div class="em-prop"><label data-i18n="name">名称</label><input class="em-input" value="1号线" readonly></div>
+        <div class="em-prop"><label data-i18n="color">颜色</label><div class="em-color-row"><div class="em-color" style="background:#ef4444"></div><input class="em-input" value="#ef4444" readonly style="flex:1"></div></div>
+        <div class="em-prop"><label data-i18n="lineType">线型</label><input class="em-input" value="普通实线" readonly></div>
       </div>
-      <!-- 画布 -->
       <div class="em-canvas">
         <svg viewBox="0 0 500 350">
-          <!-- 线路 -->
           <path id="demoLine" d="M80 200 L120 200 L160 160 L200 160 L240 200 L280 200 L320 160 L360 160 L400 200 L440 200"
-            fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="butt"
-            stroke-dasharray="800" stroke-dashoffset="800"/>
-          <!-- 站点 -->
+            fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="butt" stroke-dasharray="800" stroke-dashoffset="800"/>
           <circle class="demo-station" cx="80" cy="200" r="6" fill="#ef4444" opacity="0"/>
           <circle class="demo-station" cx="160" cy="160" r="6" fill="#ef4444" opacity="0"/>
           <circle class="demo-station" cx="240" cy="200" r="6" fill="#ef4444" opacity="0"/>
           <circle class="demo-station" cx="320" cy="160" r="6" fill="#ef4444" opacity="0"/>
           <circle class="demo-station" cx="400" cy="200" r="6" fill="#ef4444" opacity="0"/>
-          <!-- 第二条线（换乘） -->
           <path d="M160 160 L160 100 L240 100 L320 100 L320 160" fill="none" stroke="#3b82f6" stroke-width="4" stroke-linecap="butt" opacity="0.6"/>
           <circle cx="240" cy="100" r="6" fill="#3b82f6" opacity="0.6"/>
         </svg>
-        <div class="em-status">
-          <span class="mono" data-i18n="statusReady">就绪 · 选择站点工具</span>
-        </div>
+        <div class="em-status"><span class="mono" data-i18n="statusReady">就绪 · 选择站点工具</span></div>
       </div>
     </div>
   </div>
@@ -301,6 +311,7 @@ body {
 <section class="sec" id="feat">
   <div class="split">
     <div class="rv-l">
+      <div class="mag-num">01 / 04</div>
       <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><span data-i18n="tagStation">站点工具 · S</span></span>
       <h2 class="sec-title" style="text-align:left" data-i18n="s1Title">点击放置站点</h2>
       <p class="sec-desc" style="text-align:left" data-i18n="s1Desc">选中站点工具，在画布上轻点即可放置站点。拖拽空白处自动平移地图，所有站点统一规格，换乘状态由系统自动识别。</p>
@@ -328,6 +339,9 @@ body {
   </div>
 </section>
 
+<!-- 几何分割线 -->
+<div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
+
 <!-- SECTION 2: 线路工具 -->
 <section class="sec dark">
   <div class="split-r">
@@ -353,6 +367,7 @@ body {
       </div>
     </div>
     <div class="rv-r">
+      <div class="mag-num">02 / 04</div>
       <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="20" x2="20" y2="4"/><circle cx="4" cy="20" r="2" fill="currentColor"/><circle cx="20" cy="4" r="2" fill="currentColor"/></svg><span data-i18n="tagLine">线路工具 · L</span></span>
       <h2 class="sec-title" style="text-align:left" data-i18n="s2Title">拖拽绘制线路</h2>
       <p class="sec-desc" style="text-align:left" data-i18n="s2Desc">从一个站点拖拽，经过其他站点即可串联成线。线路遵循「先斜后直」的真实地铁线路风格，仅使用 0°、45°、90° 角。</p>
@@ -360,10 +375,14 @@ body {
   </div>
 </section>
 
+<!-- 几何分割线 -->
+<div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
+
 <!-- SECTION 3: 线路类型 -->
 <section class="sec">
   <div class="wrap">
     <div class="center-head">
+      <div class="mag-num rv" style="text-align:center">03 / 04</div>
       <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="20" x2="20" y2="4"/></svg><span data-i18n="tagType">线路类型</span></span></div>
       <h2 class="sec-title rv" data-i18n="s3Title">四种线型，随心选择</h2>
       <p class="sec-desc rv" data-i18n="s3Desc">普通实线、高速铁路、空心线、虚线——覆盖地铁制图的全部场景，在属性面板一键切换。</p>
@@ -384,16 +403,37 @@ body {
   </div>
 </section>
 
-<!-- SECTION 4: 主题 -->
-<section class="sec dark" id="theme">
-  <div class="wrap" style="max-width:720px;text-align:center">
-    <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg><span data-i18n="tagTheme">主题切换</span></span></div>
-    <h2 class="sec-title rv" data-i18n="s4Title">三种主题，随心切换</h2>
-    <p class="sec-desc rv" data-i18n="s4Desc">白色、深蓝、黑色三种主题，网格颜色自动适配背景。无论白天黑夜，都能找到最舒适的创作环境。</p>
-    <div class="swatches">
-      <div class="sw white rv-s" data-d="0" data-i18n="thWhite">白色</div>
-      <div class="sw dark rv-s" data-d="150" data-i18n="thDark">深蓝</div>
-      <div class="sw black rv-s" data-d="300" data-i18n="thBlack">黑色</div>
+<!-- 几何分割线 -->
+<div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
+
+<!-- SECTION 4: 工作流程（替换原主题板块） -->
+<section class="sec dark" id="flow">
+  <div class="wrap" style="max-width:900px">
+    <div class="center-head">
+      <div class="mag-num rv" style="text-align:center">04 / 04</div>
+      <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="tagFlow">创作流程</span></span></div>
+      <h2 class="sec-title rv" data-i18n="s4Title">三步完成你的线路图</h2>
+      <p class="sec-desc rv" data-i18n="s4Desc">从空白画布到精美成品，只需三个简单步骤。</p>
+    </div>
+    <div class="flow rv-rl">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg></div>
+        <h3 data-i18n="fl1">放置站点</h3>
+        <p data-i18n="fl1d">点击画布添加站点，拖拽调整位置</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="20" x2="20" y2="4"/><circle cx="4" cy="20" r="2" fill="currentColor"/><circle cx="20" cy="4" r="2" fill="currentColor"/></svg></div>
+        <h3 data-i18n="fl2">连接线路</h3>
+        <p data-i18n="fl2d">拖拽串联站点，选择线型与颜色</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <h3 data-i18n="fl3">导出成品</h3>
+        <p data-i18n="fl3d">SVG / PNG / 音频，一键下载</p>
+      </div>
     </div>
   </div>
 </section>
@@ -402,6 +442,7 @@ body {
 <section class="sec" id="export">
   <div class="wrap">
     <div class="center-head">
+      <div class="mag-num rv" style="text-align:center">EXPORT</div>
       <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span data-i18n="tagExport">导出功能</span></span></div>
       <h2 class="sec-title rv" data-i18n="s5Title">中英双语，一键导出</h2>
       <p class="sec-desc rv" data-i18n="s5Desc">支持 SVG / PNG（1x~4x）导出，图例位置四角可选，中英双语图例自由组合。还能生成离线报站音频，完全本地运行。</p>
@@ -430,6 +471,7 @@ body {
 <section class="sec dark">
   <div class="wrap">
     <div class="center-head">
+      <div class="mag-num rv" style="text-align:center">MORE</div>
       <h2 class="sec-title rv" data-i18n="moreTitle">更多功能</h2>
       <p class="sec-desc rv" data-i18n="moreSub">完整的工具链，覆盖创作全流程</p>
     </div>
@@ -467,7 +509,7 @@ body {
 const i18n = {
   zh: {
     brand:'地铁线路图绘制工具', pageTitle:'地铁线路图绘制工具',
-    navFeat:'功能', navTheme:'主题', navExport:'导出', navTry:'立即体验',
+    navFeat:'功能', navFlow:'流程', navExport:'导出', navTry:'立即体验',
     heroTitle:'绘制你的<span class="ac">地铁世界</span>', heroSub:'零依赖、零注册，开箱即用的在线地铁线路图绘制工具',
     heroCta:'立即体验',
     export:'导出', props:'属性面板', name:'名称', color:'颜色', lineType:'线型', statusReady:'就绪 · 选择站点工具',
@@ -475,8 +517,8 @@ const i18n = {
     tagLine:'线路工具 · L', s2Title:'拖拽绘制线路', s2Desc:'从一个站点拖拽，经过其他站点即可串联成线。线路遵循「先斜后直」的真实地铁线路风格，仅使用 0°、45°、90° 角。',
     tagType:'线路类型', s3Title:'四种线型，随心选择', s3Desc:'普通实线、高速铁路、空心线、虚线——覆盖地铁制图的全部场景，在属性面板一键切换。',
     typePreview:'线路类型预览', tNormal:'普通线路', tHsr:'高速铁路', tHollow:'空心线', tDashed:'虚线',
-    tagTheme:'主题切换', s4Title:'三种主题，随心切换', s4Desc:'白色、深蓝、黑色三种主题，网格颜色自动适配背景。无论白天黑夜，都能找到最舒适的创作环境。',
-    thWhite:'白色', thDark:'深蓝', thBlack:'黑色',
+    tagFlow:'创作流程', s4Title:'三步完成你的线路图', s4Desc:'从空白画布到精美成品，只需三个简单步骤。',
+    fl1:'放置站点', fl1d:'点击画布添加站点，拖拽调整位置', fl2:'连接线路', fl2d:'拖拽串联站点，选择线型与颜色', fl3:'导出成品', fl3d:'SVG / PNG / 音频，一键下载',
     tagExport:'导出功能', s5Title:'中英双语，一键导出', s5Desc:'支持 SVG / PNG（1x~4x）导出，图例位置四角可选，中英双语图例自由组合。还能生成离线报站音频，完全本地运行。',
     exSvg:'SVG 矢量图', exSvgD:'无损缩放，适合印刷与出版', exPng:'PNG 1x~4x', exPngD:'多倍率位图，适合屏幕展示', exAudio:'离线报站音频', exAudioD:'中英文语音本地生成，无需联网',
     moreTitle:'更多功能', moreSub:'完整的工具链，覆盖创作全流程',
@@ -487,7 +529,7 @@ const i18n = {
   },
   en: {
     brand:'Metro Line Map Drawing Tool', pageTitle:'Metro Line Map Drawing Tool',
-    navFeat:'Features', navTheme:'Themes', navExport:'Export', navTry:'Try Now',
+    navFeat:'Features', navFlow:'Workflow', navExport:'Export', navTry:'Try Now',
     heroTitle:'Draw Your <span class="ac">Metro World</span>', heroSub:'Zero dependencies. No registration. Start drawing instantly.',
     heroCta:'Try Now',
     export:'Export', props:'Properties', name:'Name', color:'Color', lineType:'Line Type', statusReady:'Ready · Station tool selected',
@@ -495,15 +537,15 @@ const i18n = {
     tagLine:'Line Tool · L', s2Title:'Drag to Draw Lines', s2Desc:'Drag from one station through others to form a line. Lines follow the "diagonal first, then straight" metro style, using only 0°, 45°, and 90° angles.',
     tagType:'Line Types', s3Title:'Four Line Types, Your Choice', s3Desc:'Solid, high-speed rail, hollow, and dashed lines — covering all metro cartography scenarios.',
     typePreview:'Line Type Preview', tNormal:'Solid', tHsr:'High-speed Rail', tHollow:'Hollow', tDashed:'Dashed',
-    tagTheme:'Theme Switch', s4Title:'Three Themes, Switch Freely', s4Desc:'White, dark blue, and black themes with auto-adaptive grid colors. Find your perfect creative environment.',
-    thWhite:'White', thDark:'Dark Blue', thBlack:'Black',
+    tagFlow:'Workflow', s4Title:'Three Steps to Your Map', s4Desc:'From blank canvas to polished result in three simple steps.',
+    fl1:'Place Stations', fl1d:'Click on canvas to add stations, drag to adjust', fl2:'Connect Lines', fl2d:'Drag to link stations, choose line type and color', fl3:'Export', fl3d:'SVG / PNG / Audio, one-click download',
     tagExport:'Export', s5Title:'Bilingual, One-Click Export', s5Desc:'Export as SVG or PNG (1x–4x), with customizable legend position and bilingual legend options. Offline audio also supported.',
     exSvg:'SVG Vector', exSvgD:'Lossless scaling, ideal for print', exPng:'PNG 1x–4x', exPngD:'Multi-resolution raster for screens', exAudio:'Offline Audio', exAudioD:'Chinese & English TTS, fully local',
     moreTitle:'More Features', moreSub:'Complete toolchain for your creation workflow',
     f1:'Undo / Redo', f1d:'Full operation history with Ctrl+Z / Ctrl+Y', f2:'Zoom / Pan', f2d:'Scroll to zoom, drag to pan, fit view',
     f3:'Multi-Format Export', f3d:'SVG / PNG (1x–4x), customizable legend', f4:'Live Bilingual Switch', f4d:'Switch between Chinese and English instantly',
     f5:'Local Storage', f5d:'Data saved in browser localStorage, no login', f6:'Offline Audio', f6d:'Built-in meSpeak.js, local Chinese & English audio',
-    footerBrand:'Metro Line Map Drawing Tool', footerGh:'GitHub', footerTry:'Open App', footerCopy:'Made with passion for creators'
+    footerBrand:'Metro Line Map Drawing Tool', footerGh:'GitHub', footerTry:'Open App'
   }
 };
 function applyLang(l){
@@ -532,7 +574,7 @@ window.addEventListener('scroll',()=>{const c=window.scrollY;
   nav.style.transform=(c>100&&c>ls)?'translateY(-100%)':'translateY(0)';ls=c;},{passive:true});
 
 // 入场动画
-const els=document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s,.rv-bl,.rv-fl');
+const els=document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s,.rv-bl,.rv-fl,.rv-rl');
 const ob=new IntersectionObserver(es=>{es.forEach(e=>{
   if(e.isIntersecting&&e.intersectionRatio>=0.25){
     const d=parseInt(e.target.dataset.d||'0',10);
