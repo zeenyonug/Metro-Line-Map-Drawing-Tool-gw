@@ -16,9 +16,6 @@
   --bg-3: #1a1e2a;
   --accent: #f59e0b;
   --accent-2: #fb923c;
-  --accent-b: #8b5cf6;
-  --accent-c: #3b82f6;
-  --accent-d: #ef4444;
   --accent-glow: rgba(245,158,11,0.2);
   --text-hi: #f0f0f3;
   --text-mid: #8b8b96;
@@ -33,286 +30,192 @@
   -webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;
   outline:none;caret-color:transparent;touch-action:manipulation;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-::selection { background:transparent; }
-::-moz-selection { background:transparent; }
-img,svg { -webkit-user-drag:none;user-drag:none;pointer-events:none; }
-html { scroll-behavior:smooth; }
-body {
-  font-family:'Sora',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
-  background:var(--bg-0); color:var(--text-hi);
-  line-height:1.7; overflow-x:hidden;
-  overflow-wrap:break-word; word-break:break-word;
-  position:relative;
-}
-.mono { font-family:'JetBrains Mono',monospace; }
-.serif { font-family:'Playfair Display',serif; }
+::selection{background:transparent}::-moz-selection{background:transparent}
+img,svg{-webkit-user-drag:none;user-drag:none;pointer-events:none}
+html{scroll-behavior:smooth}
+body{font-family:'Sora',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:var(--bg-0);color:var(--text-hi);line-height:1.7;overflow-x:hidden;
+  overflow-wrap:break-word;word-break:break-word;position:relative;}
+.mono{font-family:'JetBrains Mono',monospace}
 
-/* ===== 全局杂乱几何背景 ===== */
-.bg-layer {
-  position:fixed; inset:0; z-index:-1; overflow:hidden;
+/* ===== 背景渐变 ===== */
+body::before{content:'';position:fixed;inset:0;z-index:-1;
   background:
-    radial-gradient(ellipse 800px 500px at 15% -5%, rgba(139,92,246,0.10), transparent 70%),
-    radial-gradient(ellipse 700px 600px at 85% 15%, rgba(245,158,11,0.09), transparent 70%),
-    radial-gradient(ellipse 900px 700px at 50% 100%, rgba(59,130,246,0.08), transparent 70%),
-    #080b14;
-}
-.bg-shape { position:absolute; pointer-events:none; }
-.bg-shape svg { display:block; }
-.bg-tri { opacity:0.06; }
-.bg-tri.a { color:var(--accent); }
-.bg-tri.b { color:var(--accent-b); }
-.bg-tri.c { color:var(--accent-c); }
-.bg-tri.d { color:var(--accent-d); }
-.bg-poly { opacity:0.05; }
-.bg-poly.a { color:var(--accent); }
-.bg-poly.b { color:var(--accent-b); }
-.bg-circle { opacity:0.05; }
-.bg-circle.a { color:var(--accent); }
-.bg-circle.b { color:var(--accent-c); }
-.bg-line { background:var(--accent); opacity:0.07; }
-.bg-line.b { background:var(--accent-b); }
-.bg-line.c { background:var(--accent-c); }
-.bg-dia { opacity:0.06; color:var(--accent); }
-
-/* ===== 分区内装饰几何层 ===== */
-.sec-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
+    radial-gradient(ellipse 900px 600px at 20% 0%,rgba(245,158,11,0.06),transparent 70%),
+    radial-gradient(ellipse 800px 500px at 80% 30%,rgba(139,92,246,0.05),transparent 70%),
+    radial-gradient(ellipse 1000px 700px at 50% 100%,rgba(59,130,246,0.04),transparent 70%),
+    var(--bg-0);}
 
 /* ===== NAV ===== */
-.nav { position:fixed; top:0; left:0; right:0; height:60px; padding:0 40px;
-  display:flex; align-items:center; justify-content:space-between;
-  background:rgba(8,11,20,0.7); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border); z-index:1000; transition:transform .35s ease; }
-.nav-l { display:flex; align-items:center; gap:24px; }
-.nav-logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:15px; }
-.nav-logo svg { width:24px; height:24px; color:var(--accent); }
-.lang-group { display:flex; background:var(--bg-2); border:1px solid var(--border); border-radius:8px; padding:2px; }
-.lang-btn { padding:6px 14px; background:transparent; border:none; color:var(--text-lo); font-size:12px; font-weight:500;
-  cursor:pointer; border-radius:6px; transition:.2s; font-family:inherit; white-space:nowrap; }
-.lang-btn:hover { color:var(--text-hi); }
-.lang-btn.on { background:var(--accent); color:#080b14; font-weight:700; }
-.nav-r { display:flex; align-items:center; gap:28px; }
-.nav-r a { color:var(--text-mid); text-decoration:none; font-size:14px; font-weight:500; transition:.2s; white-space:nowrap; }
-.nav-r a:hover { color:var(--accent); }
-.nav-cta { padding:8px 18px; background:var(--accent); color:#080b14!important; border-radius:8px; font-weight:700!important; transition:.2s; }
-.nav-cta:hover { background:var(--accent-2); box-shadow:0 0 0 3px var(--accent-glow); }
+.nav{position:fixed;top:0;left:0;right:0;height:60px;padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,11,20,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);z-index:1000;transition:transform .35s ease;}
+.nav-l{display:flex;align-items:center;gap:24px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
+.nav-logo svg{width:24px;height:24px;color:var(--accent)}
+.lang-group{display:flex;background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:2px}
+.lang-btn{padding:6px 14px;background:transparent;border:none;color:var(--text-lo);font-size:12px;font-weight:500;
+  cursor:pointer;border-radius:6px;transition:.2s;font-family:inherit;white-space:nowrap}
+.lang-btn:hover{color:var(--text-hi)}
+.lang-btn.on{background:var(--accent);color:#080b14;font-weight:700}
+.nav-r{display:flex;align-items:center;gap:28px}
+.nav-r a{color:var(--text-mid);text-decoration:none;font-size:14px;font-weight:500;transition:.2s;white-space:nowrap}
+.nav-r a:hover{color:var(--accent)}
+.nav-cta{padding:8px 18px;background:var(--accent);color:#080b14!important;border-radius:8px;font-weight:700!important;transition:.2s}
+.nav-cta:hover{background:var(--accent-2);box-shadow:0 0 0 3px var(--accent-glow)}
 
 /* ===== HERO ===== */
-.hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  position:relative; padding:100px 40px 60px; overflow:hidden; }
-.hero-glow { position:absolute; inset:0; z-index:1;
-  background:
-    radial-gradient(circle 520px at 50% 40%, rgba(245,158,11,0.10), transparent 70%),
-    radial-gradient(circle 380px at 20% 80%, rgba(139,92,246,0.08), transparent 70%); }
-.hero-logo { width:64px; height:64px; color:var(--accent); margin-bottom:28px; position:relative; z-index:2;
-  animation:pulse 3s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{transform:scale(1);filter:drop-shadow(0 0 8px var(--accent-glow))} 50%{transform:scale(1.06);filter:drop-shadow(0 0 20px rgba(245,158,11,0.4))} }
-.hero h1 { font-size:clamp(34px,5.5vw,58px); font-weight:800; letter-spacing:-0.03em; line-height:1.1;
-  text-align:center; margin-bottom:16px; position:relative; z-index:2; max-width:800px; }
-.hero h1 .ac { color:var(--accent); }
-.hero p { font-size:clamp(14px,1.8vw,17px); color:var(--text-mid); text-align:center;
-  max-width:520px; margin:0 auto 36px; line-height:1.7; position:relative; z-index:2; white-space:normal; }
-.hero-btn { padding:14px 32px; background:var(--accent); color:#080b14; border:none; border-radius:10px;
-  font-size:15px; font-weight:700; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
-  transition:.25s; white-space:nowrap; position:relative; z-index:2; font-family:inherit; }
-.hero-btn:hover { background:var(--accent-2); box-shadow:0 8px 30px -8px rgba(245,158,11,0.5); transform:translateY(-2px); }
-.hero-btn svg { pointer-events:auto; }
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;padding:100px 40px 60px;overflow:hidden}
+.hero-glow{position:absolute;inset:0;z-index:1;
+  background:radial-gradient(circle 520px at 50% 40%,rgba(245,158,11,0.10),transparent 70%)}
+.hero-logo{width:64px;height:64px;color:var(--accent);margin-bottom:28px;position:relative;z-index:2;
+  animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 8px var(--accent-glow))}50%{transform:scale(1.06);filter:drop-shadow(0 0 20px rgba(245,158,11,0.4))}}
+.hero h1{font-size:clamp(34px,5.5vw,58px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;
+  text-align:center;margin-bottom:16px;position:relative;z-index:2;max-width:800px}
+.hero h1 .ac{color:var(--accent)}
+.hero p{font-size:clamp(14px,1.8vw,17px);color:var(--text-mid);text-align:center;
+  max-width:520px;margin:0 auto 36px;line-height:1.7;position:relative;z-index:2;white-space:normal}
+.hero-btn{padding:14px 32px;background:var(--accent);color:#080b14;border:none;border-radius:10px;
+  font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  transition:.25s;white-space:nowrap;position:relative;z-index:2;font-family:inherit}
+.hero-btn:hover{background:var(--accent-2);box-shadow:0 8px 30px -8px rgba(245,158,11,0.5);transform:translateY(-2px)}
+.hero-btn svg{pointer-events:auto}
 
 /* ===== EDITOR MOCK ===== */
-.editor-mock { width:100%; max-width:960px; margin:56px auto 0; position:relative; z-index:2;
-  border-radius:14px; overflow:hidden; border:1px solid var(--border-hi);
-  box-shadow:0 40px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset; }
-.em-topbar { height:48px; background:linear-gradient(180deg,#11151f,#0d1119);
-  border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 12px; gap:4px; }
-.em-tbtn { width:32px; height:32px; display:flex; align-items:center; justify-content:center;
-  border:1px solid transparent; border-radius:6px; color:var(--text-lo); transition:.2s; background:transparent; }
-.em-tbtn svg { width:15px; height:15px; }
-.em-tbtn.on { background:var(--accent); color:#080b14; border-color:var(--accent); }
-.em-tbtn:hover { color:var(--text-hi); border-color:var(--border-hi); }
-.em-div { width:1px; height:20px; background:var(--border); margin:0 4px; }
-.em-zoom { font-size:11px; color:var(--text-lo); padding:0 6px; white-space:nowrap; }
-.em-export { margin-left:auto; padding:6px 14px; background:var(--accent); color:#080b14; border:none;
-  border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit; white-space:nowrap; }
-.em-body { display:flex; height:380px; background:var(--canvas-bg); }
-.em-left { width:200px; background:var(--bg-1); border-right:1px solid var(--border); padding:16px 14px; overflow:hidden; }
-.em-lh { font-size:11px; color:var(--text-lo); font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
-.em-prop { margin-bottom:14px; }
-.em-prop label { display:block; font-size:11px; color:var(--text-lo); margin-bottom:5px; }
-.em-input { width:100%; height:28px; background:var(--bg-2); border:1px solid var(--border); border-radius:5px;
-  padding:0 8px; color:var(--text-mid); font-size:12px; font-family:inherit; }
-.em-color-row { display:flex; align-items:center; gap:8px; }
-.em-color { width:24px; height:24px; border-radius:5px; border:1px solid var(--border-hi); flex-shrink:0; }
-.em-canvas { flex:1; position:relative; overflow:hidden;
-  background-image:radial-gradient(circle, var(--grid) 1px, transparent 1px); background-size:20px 20px; }
-.em-canvas svg { width:100%; height:100%; }
-.em-status { position:absolute; bottom:0; left:0; right:0; height:28px; background:var(--bg-1);
-  border-top:1px solid var(--border); display:flex; align-items:center; padding:0 12px; font-size:11px; color:var(--text-lo); }
+.editor-mock{width:100%;max-width:960px;margin:56px auto 0;position:relative;z-index:2;
+  border-radius:14px;overflow:hidden;border:1px solid var(--border-hi);
+  box-shadow:0 40px 80px -30px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.03) inset}
+.em-topbar{height:48px;background:linear-gradient(180deg,#11151f,#0d1119);
+  border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 12px;gap:4px}
+.em-tbtn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  border:1px solid transparent;border-radius:6px;color:var(--text-lo);transition:.2s;background:transparent}
+.em-tbtn svg{width:15px;height:15px}
+.em-tbtn.on{background:var(--accent);color:#080b14;border-color:var(--accent)}
+.em-tbtn:hover{color:var(--text-hi);border-color:var(--border-hi)}
+.em-div{width:1px;height:20px;background:var(--border);margin:0 4px}
+.em-zoom{font-size:11px;color:var(--text-lo);padding:0 6px;white-space:nowrap}
+.em-export{margin-left:auto;padding:6px 14px;background:var(--accent);color:#080b14;border:none;
+  border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.em-body{display:flex;height:380px;background:var(--canvas-bg)}
+.em-left{width:200px;background:var(--bg-1);border-right:1px solid var(--border);padding:16px 14px;overflow:hidden}
+.em-lh{font-size:11px;color:var(--text-lo);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.em-prop{margin-bottom:14px}
+.em-prop label{display:block;font-size:11px;color:var(--text-lo);margin-bottom:5px}
+.em-input{width:100%;height:28px;background:var(--bg-2);border:1px solid var(--border);border-radius:5px;
+  padding:0 8px;color:var(--text-mid);font-size:12px;font-family:inherit}
+.em-color-row{display:flex;align-items:center;gap:8px}
+.em-color{width:24px;height:24px;border-radius:5px;border:1px solid var(--border-hi);flex-shrink:0}
+.em-canvas{flex:1;position:relative;overflow:hidden;
+  background-image:radial-gradient(circle,var(--grid) 1px,transparent 1px);background-size:20px 20px}
+.em-canvas svg{width:100%;height:100%}
+.em-status{position:absolute;bottom:0;left:0;right:0;height:28px;background:var(--bg-1);
+  border-top:1px solid var(--border);display:flex;align-items:center;padding:0 12px;font-size:11px;color:var(--text-lo)}
 
 /* ===== SECTIONS ===== */
-.sec { padding:120px 40px; position:relative; overflow:hidden; }
-.sec.dark { background:rgba(13,17,25,0.5); backdrop-filter:blur(2px); }
-.wrap { max-width:1080px; margin:0 auto; position:relative; z-index:2; }
+.sec{padding:120px 40px;position:relative;overflow:hidden}
+.sec.dark{background:rgba(13,17,25,0.4)}
+.wrap{max-width:1080px;margin:0 auto;position:relative;z-index:2}
 
-.mag-num { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--accent);
-  letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; white-space:nowrap; }
-.tag { display:inline-flex; align-items:center; gap:7px; padding:6px 14px;
-  background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); border-radius:999px;
-  font-size:12px; font-weight:600; color:var(--accent); margin-bottom:18px; white-space:nowrap; }
-.tag svg { width:13px; height:13px; }
+.mag-num{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--accent);
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;white-space:nowrap}
+.tag{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;
+  background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:999px;
+  font-size:12px;font-weight:600;color:var(--accent);margin-bottom:18px;white-space:nowrap}
+.tag svg{width:13px;height:13px}
+.sec-title{font-size:clamp(26px,3.5vw,38px);font-weight:700;letter-spacing:-0.02em;line-height:1.25;
+  max-width:600px;margin:0 auto 16px;text-align:center;white-space:normal}
+.sec-desc{font-size:16px;color:var(--text-mid);line-height:1.8;max-width:560px;margin:0 auto;
+  text-align:center;white-space:normal}
+.center-head{text-align:center;margin-bottom:56px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1080px;margin:0 auto;position:relative;z-index:2}
+.split-r{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1080px;margin:0 auto;position:relative;z-index:2}
 
-.sec-title { font-size:clamp(26px,3.5vw,38px); font-weight:700; letter-spacing:-0.02em; line-height:1.25;
-  max-width:600px; margin:0 auto 16px; text-align:center; white-space:normal; }
-.sec-desc { font-size:16px; color:var(--text-mid); line-height:1.8; max-width:560px; margin:0 auto;
-  text-align:center; white-space:normal; }
-.center-head { text-align:center; margin-bottom:56px; }
+/* 独立元素展示区 */
+.elem-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:320px}
+.elem-stage svg{width:100%;max-width:480px;height:auto}
 
-.split { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; max-width:1080px; margin:0 auto; position:relative; z-index:2; }
-.split-r { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; max-width:1080px; margin:0 auto; position:relative; z-index:2; }
+.card{background:var(--bg-2);border:1px solid var(--border);border-radius:12px;
+  padding:24px;transition:.3s;position:relative}
+.card:hover{border-color:rgba(245,158,11,0.3);transform:translateY(-3px);box-shadow:0 16px 40px -20px rgba(0,0,0,0.5)}
+.card-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  background:rgba(245,158,11,0.1);border-radius:8px;color:var(--accent);margin-bottom:16px}
+.card-icon svg{width:20px;height:20px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.card p{font-size:14px;color:var(--text-mid);line-height:1.7;white-space:normal}
 
-.card { background:var(--bg-2); border:1px solid var(--border); border-radius:12px;
-  padding:24px; transition:.3s; position:relative; }
-.card:hover { border-color:rgba(245,158,11,0.3); transform:translateY(-3px); box-shadow:0 16px 40px -20px rgba(0,0,0,0.5); }
-.card-icon { width:40px; height:40px; display:flex; align-items:center; justify-content:center;
-  background:rgba(245,158,11,0.1); border-radius:8px; color:var(--accent); margin-bottom:16px; }
-.card-icon svg { width:20px; height:20px; }
-.card h3 { font-size:16px; font-weight:600; margin-bottom:8px; }
-.card p { font-size:14px; color:var(--text-mid); line-height:1.7; white-space:normal; }
+.type-row{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
+.type-row:last-child{border-bottom:none}
+.type-label{font-size:13px;color:var(--text-mid);width:90px;font-weight:500;white-space:nowrap}
+.type-line{flex:1;height:4px;background:var(--accent);border-radius:2px;position:relative}
+.type-line.hsr::before,.type-line.hsr::after{content:'';position:absolute;left:0;right:0;height:1.5px;background:var(--accent)}
+.type-line.hsr::before{top:-3px}.type-line.hsr::after{bottom:-3px}
+.type-line.hsr-mid{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:2px;
+  background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 10px)}
+.type-line.hollow{height:6px}
+.type-line.hollow::after{content:'';position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:2px;background:var(--bg-1)}
+.type-line.dashed{background:repeating-linear-gradient(90deg,var(--accent) 0 10px,transparent 10px 16px)}
 
-.type-row { display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid var(--border); }
-.type-row:last-child { border-bottom:none; }
-.type-label { font-size:13px; color:var(--text-mid); width:90px; font-weight:500; white-space:nowrap; }
-.type-line { flex:1; height:4px; background:var(--accent); border-radius:2px; position:relative; }
-.type-line.hsr::before,.type-line.hsr::after { content:''; position:absolute; left:0; right:0; height:1.5px; background:var(--accent); }
-.type-line.hsr::before { top:-3px; } .type-line.hsr::after { bottom:-3px; }
-.type-line.hsr-mid { position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); height:2px;
-  background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 10px); }
-.type-line.hollow { height:6px; }
-.type-line.hollow::after { content:''; position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); height:2px; background:var(--bg-1); }
-.type-line.dashed { background:repeating-linear-gradient(90deg,var(--accent) 0 10px,transparent 10px 16px); }
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1080px;margin:0 auto}
 
-.grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1080px; margin:0 auto; }
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:900px;margin:0 auto;position:relative}
+.flow-step{text-align:center;padding:32px 24px;position:relative}
+.flow-step::after{content:'';position:absolute;top:50%;right:-12px;width:24px;height:1px;background:var(--border-hi)}
+.flow-step:last-child::after{display:none}
+.flow-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:var(--accent);
+  opacity:0.15;line-height:1;margin-bottom:12px}
+.flow-icon{width:48px;height:48px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border-hi);border-radius:50%;color:var(--accent);position:relative}
+.flow-icon svg{width:20px;height:20px}
+.flow-icon::before{content:'';position:absolute;inset:-4px;border:1px solid var(--border);border-radius:50%;opacity:0.5}
+.flow-step h3{font-size:15px;font-weight:600;margin-bottom:8px}
+.flow-step p{font-size:13px;color:var(--text-mid);line-height:1.6;white-space:normal}
 
-.flow { display:grid; grid-template-columns:repeat(3,1fr); gap:0; max-width:900px; margin:0 auto; position:relative; }
-.flow-step { text-align:center; padding:32px 24px; position:relative; }
-.flow-step::after { content:''; position:absolute; top:50%; right:-12px; width:24px; height:1px; background:var(--border-hi); }
-.flow-step:last-child::after { display:none; }
-.flow-num { font-family:'Playfair Display',serif; font-size:48px; font-weight:900; color:var(--accent);
-  opacity:0.15; line-height:1; margin-bottom:12px; }
-.flow-icon { width:48px; height:48px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center;
-  border:1px solid var(--border-hi); border-radius:50%; color:var(--accent); position:relative; }
-.flow-icon svg { width:20px; height:20px; }
-.flow-icon::before { content:''; position:absolute; inset:-4px; border:1px solid var(--border); border-radius:50%; opacity:0.5; }
-.flow-step h3 { font-size:15px; font-weight:600; margin-bottom:8px; }
-.flow-step p { font-size:13px; color:var(--text-mid); line-height:1.6; white-space:normal; }
+.geo-divider{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto;max-width:200px}
+.geo-divider span{display:block}
+.geo-divider .dot{width:6px;height:6px;background:var(--accent);border-radius:50%}
+.geo-divider .line{flex:1;height:1px;background:var(--border-hi)}
+.geo-divider .diamond{width:8px;height:8px;background:var(--accent);transform:rotate(45deg)}
 
-.geo-divider { display:flex; align-items:center; justify-content:center; gap:8px; margin:0 auto; max-width:200px; }
-.geo-divider span { display:block; }
-.geo-divider .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; }
-.geo-divider .line { flex:1; height:1px; background:var(--border-hi); }
-.geo-divider .diamond { width:8px; height:8px; background:var(--accent); transform:rotate(45deg); }
+.footer{padding:60px 40px 40px;border-top:1px solid var(--border);text-align:center;position:relative;overflow:hidden}
+.footer-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;font-weight:600}
+.footer-brand svg{width:24px;height:24px;color:var(--accent)}
+.footer-links{display:flex;justify-content:center;gap:32px;margin-bottom:28px;flex-wrap:wrap}
+.footer-links a{color:var(--text-mid);text-decoration:none;font-size:14px;transition:.2s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.footer-links a:hover{color:var(--accent)}
+.footer-links svg{width:16px;height:16px;pointer-events:auto}
+.footer-copy{color:var(--text-lo);font-size:13px;padding-top:20px;border-top:1px solid var(--border);display:inline-block;padding-left:32px;padding-right:32px}
+.footer-copy a{color:var(--accent);text-decoration:none}
 
-.footer { padding:60px 40px 40px; border-top:1px solid var(--border); text-align:center; position:relative; overflow:hidden; }
-.footer-brand { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:20px; font-weight:600; }
-.footer-brand svg { width:24px; height:24px; color:var(--accent); }
-.footer-links { display:flex; justify-content:center; gap:32px; margin-bottom:28px; flex-wrap:wrap; }
-.footer-links a { color:var(--text-mid); text-decoration:none; font-size:14px; transition:.2s; display:inline-flex; align-items:center; gap:7px; white-space:nowrap; }
-.footer-links a:hover { color:var(--accent); }
-.footer-links svg { width:16px; height:16px; pointer-events:auto; }
-.footer-copy { color:var(--text-lo); font-size:13px; padding-top:20px; border-top:1px solid var(--border); display:inline-block; padding-left:32px; padding-right:32px; }
-.footer-copy a { color:var(--accent); text-decoration:none; }
+/* 入场动画 */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv-l{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease}
+.rv-r{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease}
+.rv-s{opacity:0;transform:scale(.92);transition:opacity .7s ease,transform .7s ease}
+.rv-bl{opacity:0;filter:blur(12px);transition:opacity .8s ease,filter .8s ease}
+.rv-fl{opacity:0;transform:perspective(800px) rotateY(-8deg);transition:opacity .8s ease,transform .8s ease}
+.rv-rl{opacity:0;transform:perspective(800px) rotateX(8deg);transition:opacity .8s ease,transform .8s ease}
+.go.rv,.go.rv-l,.go.rv-r,.go.rv-s,.go.rv-bl,.go.rv-fl,.go.rv-rl{opacity:1;transform:none;filter:none}
 
-.rv { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
-.rv-l { opacity:0; transform:translateX(-40px); transition:opacity .7s ease, transform .7s ease; }
-.rv-r { opacity:0; transform:translateX(40px); transition:opacity .7s ease, transform .7s ease; }
-.rv-s { opacity:0; transform:scale(.92); transition:opacity .7s ease, transform .7s ease; }
-.rv-bl { opacity:0; filter:blur(12px); transition:opacity .8s ease, filter .8s ease; }
-.rv-fl { opacity:0; transform:perspective(800px) rotateY(-8deg); transition:opacity .8s ease, transform .8s ease; }
-.rv-rl { opacity:0; transform:perspective(800px) rotateX(8deg); transition:opacity .8s ease, transform .8s ease; }
-.go.rv,.go.rv-l,.go.rv-r,.go.rv-s,.go.rv-bl,.go.rv-fl,.go.rv-rl { opacity:1; transform:none; filter:none; }
+/* 站点出现动画 */
+.st-pop{opacity:0;transition:opacity .5s ease,transform .5s ease;transform:scale(0)}
+.st-pop.show{opacity:1;transform:scale(1)}
 
-@media(max-width:900px){ .grid3{grid-template-columns:repeat(2,1fr)} .flow{grid-template-columns:1fr;gap:24px} .flow-step::after{display:none} }
+/* 线路绘制动画 */
+.line-draw{stroke-dasharray:var(--len,500);stroke-dashoffset:var(--len,500);transition:stroke-dashoffset 1.5s ease}
+
+@media(max-width:900px){.grid3{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr;gap:24px}.flow-step::after{display:none}}
 @media(max-width:768px){
-  .nav{padding:0 16px} .nav-logo span{display:none} .nav-r a:not(.nav-cta){display:none}
+  .nav{padding:0 16px}.nav-logo span{display:none}.nav-r a:not(.nav-cta){display:none}
   .split,.split-r{grid-template-columns:1fr;gap:40px}
-  .em-left{display:none} .sec{padding:80px 20px} .hero{padding:100px 20px 40px}
+  .em-left{display:none}.sec{padding:80px 20px}.hero{padding:100px 20px 40px}
 }
-@media(max-width:560px){ .grid3{grid-template-columns:1fr} }
+@media(max-width:560px){.grid3{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<!-- 全局固定背景：杂乱几何图形 -->
-<div class="bg-layer" aria-hidden="true">
-  <!-- 三角形（随机颜色+旋转+位置）-->
-  <div class="bg-shape bg-tri a" style="top:2%;left:4%;width:180px;transform:rotate(15deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
-  <div class="bg-shape bg-tri b" style="top:18%;right:8%;width:120px;transform:rotate(-25deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
-  <div class="bg-shape bg-tri c" style="top:35%;left:2%;width:100px;transform:rotate(60deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,50 95,5 95,95"/></svg></div>
-  <div class="bg-shape bg-tri d" style="top:55%;right:2%;width:150px;transform:rotate(-10deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
-  <div class="bg-shape bg-tri a" style="top:72%;left:10%;width:140px;transform:rotate(-50deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,95 95,95 50,5"/></svg></div>
-  <div class="bg-shape bg-tri b" style="top:88%;right:15%;width:110px;transform:rotate(40deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
-  <div class="bg-shape bg-tri c" style="top:8%;left:40%;width:90px;transform:rotate(110deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,5 95,5 50,95"/></svg></div>
-  <div class="bg-shape bg-tri d" style="top:42%;left:85%;width:85px;transform:rotate(-70deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
-  <div class="bg-shape bg-tri a" style="top:62%;left:55%;width:95px;transform:rotate(150deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,50 95,5 95,95"/></svg></div>
-  <div class="bg-shape bg-tri b" style="top:25%;left:70%;width:75px;transform:rotate(-140deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,95 5,5 95,5"/></svg></div>
-  <div class="bg-shape bg-tri c" style="top:78%;right:35%;width:125px;transform:rotate(30deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
-  <div class="bg-shape bg-tri d" style="top:32%;left:20%;width:70px;transform:rotate(-90deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,95 95,95 50,5"/></svg></div>
-
-  <!-- 多边形（五边/六边/八边形） -->
-  <div class="bg-shape bg-poly a" style="top:10%;right:25%;width:130px;transform:rotate(20deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,40 78,95 22,95 5,40"/></svg></div>
-  <div class="bg-shape bg-poly b" style="top:48%;left:15%;width:110px;transform:rotate(-15deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,3 90,27 90,73 50,97 10,73 10,27"/></svg></div>
-  <div class="bg-shape bg-poly a" style="top:82%;left:45%;width:95px;transform:rotate(60deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 90,35 75,85 25,85 10,35"/></svg></div>
-  <div class="bg-shape bg-poly b" style="top:22%;left:12%;width:80px;transform:rotate(-45deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,10 80,30 90,65 70,90 30,90 10,65 20,30"/></svg></div>
-
-  <!-- 圆形（空心/实心） -->
-  <div class="bg-shape bg-circle a" style="top:5%;left:80%;width:160px">
-    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1"><circle cx="50" cy="50" r="48"/></svg></div>
-  <div class="bg-shape bg-circle b" style="top:40%;right:30%;width:100px">
-    <svg viewBox="0 0 100 100" fill="currentColor" opacity="0.6"><circle cx="50" cy="50" r="20"/></svg></div>
-  <div class="bg-shape bg-circle a" style="top:65%;left:30%;width:140px">
-    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.7"><circle cx="50" cy="50" r="48"/><circle cx="50" cy="50" r="35"/><circle cx="50" cy="50" r="20"/></svg></div>
-  <div class="bg-shape bg-circle b" style="top:92%;left:5%;width:90px">
-    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1"><circle cx="50" cy="50" r="48"/></svg></div>
-  <div class="bg-shape bg-circle a" style="top:30%;left:50%;width:70px">
-    <svg viewBox="0 0 100 100" fill="currentColor" opacity="0.5"><circle cx="50" cy="50" r="30"/></svg></div>
-
-  <!-- 线条 -->
-  <div class="bg-shape bg-line" style="top:15%;left:0;width:220px;height:1px;transform:rotate(-8deg)"></div>
-  <div class="bg-shape bg-line b" style="top:38%;right:0;width:280px;height:1px;transform:rotate(12deg)"></div>
-  <div class="bg-shape bg-line c" style="top:60%;left:0;width:180px;height:1px;transform:rotate(5deg)"></div>
-  <div class="bg-shape bg-line" style="top:85%;right:0;width:320px;height:1px;transform:rotate(-15deg)"></div>
-  <div class="bg-shape bg-line b" style="top:50%;left:5%;width:1px;height:180px;transform:rotate(20deg)"></div>
-  <div class="bg-shape bg-line c" style="top:70%;right:10%;width:1px;height:220px;transform:rotate(-10deg)"></div>
-  <div class="bg-shape bg-line" style="top:20%;left:50%;width:1px;height:120px;transform:rotate(45deg)"></div>
-
-  <!-- 菱形 -->
-  <div class="bg-shape bg-dia" style="top:12%;left:60%;width:60px;transform:rotate(45deg)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,10 90,50 50,90 10,50"/></svg></div>
-  <div class="bg-shape bg-dia" style="top:55%;right:18%;width:50px;transform:rotate(0deg);opacity:0.04;color:var(--accent-b)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,50 50,95 5,50"/></svg></div>
-  <div class="bg-shape bg-dia" style="top:80%;left:25%;width:45px;transform:rotate(30deg);opacity:0.05;color:var(--accent-c)">
-    <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,10 90,50 50,90 10,50"/></svg></div>
-
-  <!-- 方格对角线装饰 -->
-  <div class="bg-shape" style="top:45%;left:0;width:140px;height:140px;opacity:0.04;color:var(--accent)">
-    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="5" y="5" width="90" height="90"/><line x1="5" y1="5" x2="95" y2="95"/><line x1="95" y1="5" x2="5" y2="95"/></svg></div>
-  <div class="bg-shape" style="top:75%;right:0;width:120px;height:120px;opacity:0.04;color:var(--accent-b)">
-    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="5" y="5" width="90" height="90"/><rect x="25" y="25" width="50" height="50"/><rect x="40" y="40" width="20" height="20"/></svg></div>
-</div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -337,7 +240,6 @@ body {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
-
   <svg class="hero-logo" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/></svg>
   <h1 data-i18n="heroTitle">绘制你的<span class="ac">地铁世界</span></h1>
   <p data-i18n="heroSub">零依赖、零注册，开箱即用的在线地铁线路图绘制工具</p>
@@ -345,7 +247,7 @@ body {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
     <span data-i18n="heroCta">立即体验</span>
   </a>
-
+  <!-- 编辑器复刻 -->
   <div class="editor-mock rv-s">
     <div class="em-topbar">
       <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg></button>
@@ -355,9 +257,7 @@ body {
       <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg></button>
       <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3L21 13"/></svg></button>
       <div class="em-div"></div>
-      <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg></button>
       <span class="em-zoom mono">100%</span>
-      <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></button>
       <button class="em-export" data-i18n="export">导出</button>
     </div>
     <div class="em-body">
@@ -369,15 +269,15 @@ body {
       </div>
       <div class="em-canvas">
         <svg viewBox="0 0 500 350">
-          <path id="demoLine" d="M80 200 L120 200 L160 160 L200 160 L240 200 L280 200 L320 160 L360 160 L400 200 L440 200"
+          <path id="heroLine" d="M80 200 L120 200 L160 160 L200 160 L240 200 L280 200 L320 160 L360 160 L400 200 L440 200"
             fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="butt" stroke-dasharray="800" stroke-dashoffset="800"/>
-          <circle class="demo-station" cx="80" cy="200" r="6" fill="#ef4444" opacity="0"/>
-          <circle class="demo-station" cx="160" cy="160" r="6" fill="#ef4444" opacity="0"/>
-          <circle class="demo-station" cx="240" cy="200" r="6" fill="#ef4444" opacity="0"/>
-          <circle class="demo-station" cx="320" cy="160" r="6" fill="#ef4444" opacity="0"/>
-          <circle class="demo-station" cx="400" cy="200" r="6" fill="#ef4444" opacity="0"/>
-          <path d="M160 160 L160 100 L240 100 L320 100 L320 160" fill="none" stroke="#3b82f6" stroke-width="4" stroke-linecap="butt" opacity="0.6"/>
-          <circle cx="240" cy="100" r="6" fill="#3b82f6" opacity="0.6"/>
+          <circle class="hero-st" cx="80" cy="200" r="6" fill="#ef4444" opacity="0"/>
+          <circle class="hero-st" cx="160" cy="160" r="6" fill="#ef4444" opacity="0"/>
+          <circle class="hero-st" cx="240" cy="200" r="6" fill="#ef4444" opacity="0"/>
+          <circle class="hero-st" cx="320" cy="160" r="6" fill="#ef4444" opacity="0"/>
+          <circle class="hero-st" cx="400" cy="200" r="6" fill="#ef4444" opacity="0"/>
+          <path d="M160 160 L160 100 L240 100 L320 100 L320 160" fill="none" stroke="#3b82f6" stroke-width="4" stroke-linecap="butt" opacity="0.5"/>
+          <circle cx="240" cy="100" r="6" fill="#3b82f6" opacity="0.5"/>
         </svg>
         <div class="em-status"><span class="mono" data-i18n="statusReady">就绪 · 选择站点工具</span></div>
       </div>
@@ -385,39 +285,33 @@ body {
   </div>
 </section>
 
-<!-- SECTION 1: 站点工具 -->
+<!-- ===== SECTION 01: 站点 ===== -->
 <section class="sec" id="feat">
-  <div class="sec-bg">
-    <div class="bg-shape bg-tri a" style="top:10%;left:-3%;width:180px;transform:rotate(-20deg);opacity:0.08">
-      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
-    <div class="bg-shape bg-circle b" style="bottom:8%;right:2%;width:160px">
-      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1" opacity="0.08"><circle cx="50" cy="50" r="48"/></svg></div>
-  </div>
   <div class="split">
     <div class="rv-l">
-      <div class="mag-num">01 / 04</div>
+      <div class="mag-num">01</div>
       <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><span data-i18n="tagStation">站点工具 · S</span></span>
       <h2 class="sec-title" style="text-align:left" data-i18n="s1Title">点击放置站点</h2>
       <p class="sec-desc" style="text-align:left" data-i18n="s1Desc">选中站点工具，在画布上轻点即可放置站点。拖拽空白处自动平移地图，所有站点统一规格，换乘状态由系统自动识别。</p>
     </div>
     <div class="rv-r">
-      <div class="editor-mock" style="max-width:none;margin:0">
-        <div class="em-topbar">
-          <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg></button>
-          <button class="em-tbtn on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg></button>
-          <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="20" x2="20" y2="4"/><circle cx="4" cy="20" r="2" fill="currentColor"/><circle cx="20" cy="4" r="2" fill="currentColor"/></svg></button>
-          <span class="em-zoom mono">Station</span>
-        </div>
-        <div class="em-body" style="height:300px">
-          <div class="em-canvas">
-            <svg viewBox="0 0 400 250" id="stationSvg2">
-              <circle class="st2" cx="100" cy="120" r="6" fill="#f59e0b" opacity="0"/>
-              <circle class="st2" cx="180" cy="80" r="6" fill="#f59e0b" opacity="0"/>
-              <circle class="st2" cx="260" cy="120" r="6" fill="#f59e0b" opacity="0"/>
-              <circle class="st2" cx="320" cy="180" r="6" fill="#f59e0b" opacity="0"/>
-            </svg>
-          </div>
-        </div>
+      <!-- 独立站点元素：无背景，逐个弹出 -->
+      <div class="elem-stage" id="stationStage">
+        <svg viewBox="0 0 400 280">
+          <!-- 网格点 -->
+          <g opacity="0.15">
+            <circle cx="50" cy="50" r="1" fill="#64748b"/><circle cx="100" cy="50" r="1" fill="#64748b"/><circle cx="150" cy="50" r="1" fill="#64748b"/><circle cx="200" cy="50" r="1" fill="#64748b"/><circle cx="250" cy="50" r="1" fill="#64748b"/><circle cx="300" cy="50" r="1" fill="#64748b"/><circle cx="350" cy="50" r="1" fill="#64748b"/>
+            <circle cx="50" cy="100" r="1" fill="#64748b"/><circle cx="100" cy="100" r="1" fill="#64748b"/><circle cx="150" cy="100" r="1" fill="#64748b"/><circle cx="200" cy="100" r="1" fill="#64748b"/><circle cx="250" cy="100" r="1" fill="#64748b"/><circle cx="300" cy="100" r="1" fill="#64748b"/><circle cx="350" cy="100" r="1" fill="#64748b"/>
+            <circle cx="50" cy="150" r="1" fill="#64748b"/><circle cx="100" cy="150" r="1" fill="#64748b"/><circle cx="150" cy="150" r="1" fill="#64748b"/><circle cx="200" cy="150" r="1" fill="#64748b"/><circle cx="250" cy="150" r="1" fill="#64748b"/><circle cx="300" cy="150" r="1" fill="#64748b"/><circle cx="350" cy="150" r="1" fill="#64748b"/>
+            <circle cx="50" cy="200" r="1" fill="#64748b"/><circle cx="100" cy="200" r="1" fill="#64748b"/><circle cx="150" cy="200" r="1" fill="#64748b"/><circle cx="200" cy="200" r="1" fill="#64748b"/><circle cx="250" cy="200" r="1" fill="#64748b"/><circle cx="300" cy="200" r="1" fill="#64748b"/><circle cx="350" cy="200" r="1" fill="#64748b"/>
+            <circle cx="50" cy="250" r="1" fill="#64748b"/><circle cx="100" cy="250" r="1" fill="#64748b"/><circle cx="150" cy="250" r="1" fill="#64748b"/><circle cx="200" cy="250" r="1" fill="#64748b"/><circle cx="250" cy="250" r="1" fill="#64748b"/><circle cx="300" cy="250" r="1" fill="#64748b"/><circle cx="350" cy="250" r="1" fill="#64748b"/>
+          </g>
+          <!-- 独立站点 -->
+          <g class="st-pop" data-st="0"><circle cx="80" cy="180" r="6" fill="#f59e0b"/></g>
+          <g class="st-pop" data-st="1"><circle cx="160" cy="100" r="6" fill="#f59e0b"/></g>
+          <g class="st-pop" data-st="2"><circle cx="240" cy="180" r="6" fill="#f59e0b"/></g>
+          <g class="st-pop" data-st="3"><circle cx="320" cy="100" r="6" fill="#f59e0b"/></g>
+        </svg>
       </div>
     </div>
   </div>
@@ -425,38 +319,30 @@ body {
 
 <div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
 
-<!-- SECTION 2: 线路工具 -->
+<!-- ===== SECTION 02: 线路 ===== -->
 <section class="sec dark">
-  <div class="sec-bg">
-    <div class="bg-shape bg-poly b" style="top:15%;right:-2%;width:180px;transform:rotate(35deg);opacity:0.06">
-      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,40 78,95 22,95 5,40"/></svg></div>
-    <div class="bg-shape bg-dia" style="bottom:12%;left:3%;width:70px;transform:rotate(30deg);opacity:0.05;color:var(--accent)">
-      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,10 90,50 50,90 10,50"/></svg></div>
-  </div>
   <div class="split-r">
     <div class="rv-fl">
-      <div class="editor-mock" style="max-width:none;margin:0">
-        <div class="em-topbar">
-          <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg></button>
-          <button class="em-tbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg></button>
-          <button class="em-tbtn on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="20" x2="20" y2="4"/><circle cx="4" cy="20" r="2" fill="currentColor"/><circle cx="20" cy="4" r="2" fill="currentColor"/></svg></button>
-          <span class="em-zoom mono">Line</span>
-        </div>
-        <div class="em-body" style="height:300px">
-          <div class="em-canvas">
-            <svg viewBox="0 0 400 250">
-              <path d="M80 160 L120 160 L160 120 L200 120 L240 160 L280 160 L320 120" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="butt"/>
-              <circle cx="80" cy="160" r="6" fill="#f59e0b"/>
-              <circle cx="160" cy="120" r="6" fill="#f59e0b"/>
-              <circle cx="240" cy="160" r="6" fill="#f59e0b"/>
-              <circle cx="320" cy="120" r="6" fill="#f59e0b"/>
-            </svg>
-          </div>
-        </div>
+      <!-- 独立线路元素：线从第一个站点滑动连接到下一个 -->
+      <div class="elem-stage" id="lineStage">
+        <svg viewBox="0 0 400 280">
+          <!-- 已有站点 -->
+          <circle cx="60" cy="200" r="6" fill="#f59e0b"/>
+          <circle cx="140" cy="120" r="6" fill="#f59e0b"/>
+          <circle cx="220" cy="200" r="6" fill="#f59e0b"/>
+          <circle cx="300" cy="120" r="6" fill="#f59e0b"/>
+          <!-- 线路（动画绘制）-->
+          <path id="drawLine" d="M60 200 L100 200 L140 160 L140 120 L180 120 L220 160 L220 200 L260 200 L300 160 L300 120"
+            fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="butt"/>
+          <!-- 光点沿线路滑动 -->
+          <circle id="lightDot" cx="60" cy="200" r="4" fill="#fff" opacity="0">
+            <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
       </div>
     </div>
     <div class="rv-r">
-      <div class="mag-num">02 / 04</div>
+      <div class="mag-num">02</div>
       <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="20" x2="20" y2="4"/><circle cx="4" cy="20" r="2" fill="currentColor"/><circle cx="20" cy="4" r="2" fill="currentColor"/></svg><span data-i18n="tagLine">线路工具 · L</span></span>
       <h2 class="sec-title" style="text-align:left" data-i18n="s2Title">拖拽绘制线路</h2>
       <p class="sec-desc" style="text-align:left" data-i18n="s2Desc">从一个站点拖拽，经过其他站点即可串联成线。线路遵循「先斜后直」的真实地铁线路风格，仅使用 0°、45°、90° 角。</p>
@@ -466,31 +352,22 @@ body {
 
 <div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
 
-<!-- SECTION 3: 线路类型 -->
+<!-- ===== SECTION 03: 线路类型 ===== -->
 <section class="sec">
-  <div class="sec-bg">
-    <div class="bg-shape bg-tri c" style="top:-5%;left:35%;width:160px;transform:rotate(75deg);opacity:0.06">
-      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="5,50 95,5 95,95"/></svg></div>
-    <div class="bg-shape bg-line b" style="bottom:20%;right:8%;width:200px;height:1px;transform:rotate(-18deg);opacity:0.1"></div>
-  </div>
   <div class="wrap">
     <div class="center-head">
-      <div class="mag-num rv" style="text-align:center">03 / 04</div>
+      <div class="mag-num rv" style="text-align:center">03</div>
       <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="20" x2="20" y2="4"/></svg><span data-i18n="tagType">线路类型</span></span></div>
       <h2 class="sec-title rv" data-i18n="s3Title">四种线型，随心选择</h2>
       <p class="sec-desc rv" data-i18n="s3Desc">普通实线、高速铁路、空心线、虚线——覆盖地铁制图的全部场景，在属性面板一键切换。</p>
     </div>
-    <div class="editor-mock rv-bl">
-      <div class="em-topbar">
-        <span class="em-zoom" style="color:var(--accent);font-weight:600" data-i18n="typePreview">线路类型预览</span>
-      </div>
-      <div class="em-body" style="height:260px">
-        <div class="em-canvas" style="display:flex;flex-direction:column;justify-content:center;padding:0 48px">
-          <div class="type-row"><span class="type-label" data-i18n="tNormal">普通线路</span><div class="type-line"></div></div>
-          <div class="type-row"><span class="type-label" data-i18n="tHsr">高速铁路</span><div class="type-line hsr"><div class="type-line hsr-mid"></div></div></div>
-          <div class="type-row"><span class="type-label" data-i18n="tHollow">空心线</span><div class="type-line hollow"></div></div>
-          <div class="type-row"><span class="type-label" data-i18n="tDashed">虚线</span><div class="type-line dashed"></div></div>
-        </div>
+    <!-- 独立线型展示：无编辑器框架，纯净展示 -->
+    <div class="elem-stage rv-bl" style="min-height:auto;background:var(--bg-1);border:1px solid var(--border);border-radius:14px;padding:32px 48px;max-width:720px;margin:0 auto">
+      <div style="width:100%">
+        <div class="type-row"><span class="type-label" data-i18n="tNormal">普通线路</span><div class="type-line"></div></div>
+        <div class="type-row"><span class="type-label" data-i18n="tHsr">高速铁路</span><div class="type-line hsr"><div class="type-line hsr-mid"></div></div></div>
+        <div class="type-row"><span class="type-label" data-i18n="tHollow">空心线</span><div class="type-line hollow"></div></div>
+        <div class="type-row"><span class="type-label" data-i18n="tDashed">虚线</span><div class="type-line dashed"></div></div>
       </div>
     </div>
   </div>
@@ -498,17 +375,11 @@ body {
 
 <div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
 
-<!-- SECTION 4: 工作流程 -->
+<!-- ===== SECTION 04: 工作流程 ===== -->
 <section class="sec dark" id="flow">
-  <div class="sec-bg">
-    <div class="bg-shape bg-circle a" style="top:-8%;right:-3%;width:280px">
-      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.08"><circle cx="50" cy="50" r="48"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="18"/></svg></div>
-    <div class="bg-shape bg-tri d" style="bottom:10%;left:-3%;width:200px;transform:rotate(25deg);opacity:0.06">
-      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,95 5,5 95,5"/></svg></div>
-  </div>
   <div class="wrap" style="max-width:900px">
     <div class="center-head">
-      <div class="mag-num rv" style="text-align:center">04 / 04</div>
+      <div class="mag-num rv" style="text-align:center">04</div>
       <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="tagFlow">创作流程</span></span></div>
       <h2 class="sec-title rv" data-i18n="s4Title">三步完成你的线路图</h2>
       <p class="sec-desc rv" data-i18n="s4Desc">从空白画布到精美成品，只需三个简单步骤。</p>
@@ -536,17 +407,13 @@ body {
   </div>
 </section>
 
-<!-- SECTION 5: 导出 -->
+<div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
+
+<!-- ===== SECTION 05: 导出 ===== -->
 <section class="sec" id="export">
-  <div class="sec-bg">
-    <div class="bg-shape bg-poly a" style="top:8%;left:-2%;width:160px;transform:rotate(-30deg);opacity:0.06">
-      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 90,35 75,85 25,85 10,35"/></svg></div>
-    <div class="bg-shape" style="bottom:10%;right:5%;width:130px;height:130px;opacity:0.05;color:var(--accent-c)">
-      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5"><rect x="10" y="10" width="80" height="80"/><rect x="25" y="25" width="50" height="50"/><line x1="10" y1="10" x2="90" y2="90"/><line x1="90" y1="10" x2="10" y2="90"/></svg></div>
-  </div>
   <div class="wrap">
     <div class="center-head">
-      <div class="mag-num rv" style="text-align:center">EXPORT</div>
+      <div class="mag-num rv" style="text-align:center">05</div>
       <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span data-i18n="tagExport">导出功能</span></span></div>
       <h2 class="sec-title rv" data-i18n="s5Title">中英双语，一键导出</h2>
       <p class="sec-desc rv" data-i18n="s5Desc">支持 SVG / PNG（1x~4x）导出，图例位置四角可选，中英双语图例自由组合。还能生成离线报站音频，完全本地运行。</p>
@@ -571,36 +438,30 @@ body {
   </div>
 </section>
 
-<!-- 功能汇总 -->
+<div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
+
+<!-- ===== SECTION 06: 更多功能（不重复前面已讲的） ===== -->
 <section class="sec dark">
-  <div class="sec-bg">
-    <div class="bg-shape bg-tri b" style="top:15%;right:-2%;width:180px;transform:rotate(40deg);opacity:0.06">
-      <svg viewBox="0 0 100 100" fill="currentColor"><polygon points="50,5 95,95 5,95"/></svg></div>
-    <div class="bg-shape bg-line" style="bottom:30%;left:10%;width:260px;height:1px;transform:rotate(10deg);opacity:0.08"></div>
-  </div>
   <div class="wrap">
     <div class="center-head">
-      <div class="mag-num rv" style="text-align:center">MORE</div>
-      <h2 class="sec-title rv" data-i18n="moreTitle">更多功能</h2>
+      <div class="mag-num rv" style="text-align:center">06</div>
+      <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="0.5" fill="currentColor"/></svg><span data-i18n="tagMore">更多功能</span></span></div>
+      <h2 class="sec-title rv" data-i18n="moreTitle">还有这些</h2>
       <p class="sec-desc rv" data-i18n="moreSub">完整的工具链，覆盖创作全流程</p>
     </div>
     <div class="grid3">
       <div class="card rv" data-d="0"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg></div><h3 data-i18n="f1">撤销 / 重做</h3><p data-i18n="f1d">完整操作历史，Ctrl+Z / Ctrl+Y 自由穿梭</p></div>
       <div class="card rv" data-d="120"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><h3 data-i18n="f2">缩放 / 平移</h3><p data-i18n="f2d">滚轮缩放、拖拽平移、一键适应视图</p></div>
-      <div class="card rv" data-d="240"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><h3 data-i18n="f3">多格式导出</h3><p data-i18n="f3d">SVG / PNG（1x~4x），图例自由组合</p></div>
-      <div class="card rv" data-d="360"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div><h3 data-i18n="f4">双语实时切换</h3><p data-i18n="f4d">中文 / English 一键切换，全界面同步</p></div>
-      <div class="card rv" data-d="480"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div><h3 data-i18n="f5">本地存储</h3><p data-i18n="f5d">数据保存在浏览器 localStorage，无需登录</p></div>
-      <div class="card rv" data-d="600"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3 data-i18n="f6">离线报站音频</h3><p data-i18n="f6d">内置 meSpeak.js，中英文音频本地生成</p></div>
+      <div class="card rv" data-d="240"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div><h3 data-i18n="f3">双语实时切换</h3><p data-i18n="f3d">中文 / English 一键切换，全界面同步</p></div>
+      <div class="card rv" data-d="360"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div><h3 data-i18n="f4">本地存储</h3><p data-i18n="f4d">数据保存在浏览器 localStorage，无需登录</p></div>
+      <div class="card rv" data-d="480"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3 data-i18n="f5">三种主题</h3><p data-i18n="f5d">白色 / 深蓝 / 黑色，网格自动适配</p></div>
+      <div class="card rv" data-d="600"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3 data-i18n="f6">图层管理</h3><p data-i18n="f6d">多线路独立管理，拖拽调整层级</p></div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="sec-bg">
-    <div class="bg-shape bg-circle b" style="top:-40%;left:50%;transform:translateX(-50%);width:600px">
-      <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.05"><circle cx="50" cy="50" r="48"/><circle cx="50" cy="50" r="35"/><circle cx="50" cy="50" r="22"/></svg></div>
-  </div>
   <div class="footer-brand">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>
     <span data-i18n="footerBrand">地铁线路图绘制工具</span>
@@ -629,15 +490,15 @@ const i18n = {
     tagStation:'站点工具 · S', s1Title:'点击放置站点', s1Desc:'选中站点工具，在画布上轻点即可放置站点。拖拽空白处自动平移地图，所有站点统一规格，换乘状态由系统自动识别。',
     tagLine:'线路工具 · L', s2Title:'拖拽绘制线路', s2Desc:'从一个站点拖拽，经过其他站点即可串联成线。线路遵循「先斜后直」的真实地铁线路风格，仅使用 0°、45°、90° 角。',
     tagType:'线路类型', s3Title:'四种线型，随心选择', s3Desc:'普通实线、高速铁路、空心线、虚线——覆盖地铁制图的全部场景，在属性面板一键切换。',
-    typePreview:'线路类型预览', tNormal:'普通线路', tHsr:'高速铁路', tHollow:'空心线', tDashed:'虚线',
+    tNormal:'普通线路', tHsr:'高速铁路', tHollow:'空心线', tDashed:'虚线',
     tagFlow:'创作流程', s4Title:'三步完成你的线路图', s4Desc:'从空白画布到精美成品，只需三个简单步骤。',
     fl1:'放置站点', fl1d:'点击画布添加站点，拖拽调整位置', fl2:'连接线路', fl2d:'拖拽串联站点，选择线型与颜色', fl3:'导出成品', fl3d:'SVG / PNG / 音频，一键下载',
     tagExport:'导出功能', s5Title:'中英双语，一键导出', s5Desc:'支持 SVG / PNG（1x~4x）导出，图例位置四角可选，中英双语图例自由组合。还能生成离线报站音频，完全本地运行。',
     exSvg:'SVG 矢量图', exSvgD:'无损缩放，适合印刷与出版', exPng:'PNG 1x~4x', exPngD:'多倍率位图，适合屏幕展示', exAudio:'离线报站音频', exAudioD:'中英文语音本地生成，无需联网',
-    moreTitle:'更多功能', moreSub:'完整的工具链，覆盖创作全流程',
+    tagMore:'更多功能', moreTitle:'还有这些', moreSub:'完整的工具链，覆盖创作全流程',
     f1:'撤销 / 重做', f1d:'完整操作历史，Ctrl+Z / Ctrl+Y 自由穿梭', f2:'缩放 / 平移', f2d:'滚轮缩放、拖拽平移、一键适应视图',
-    f3:'多格式导出', f3d:'SVG / PNG（1x~4x），图例自由组合', f4:'双语实时切换', f4d:'中文 / English 一键切换，全界面同步',
-    f5:'本地存储', f5d:'数据保存在浏览器 localStorage，无需登录', f6:'离线报站音频', f6d:'内置 meSpeak.js，中英文音频本地生成',
+    f3:'双语实时切换', f3d:'中文 / English 一键切换，全界面同步', f4:'本地存储', f4d:'数据保存在浏览器 localStorage，无需登录',
+    f5:'三种主题', f5d:'白色 / 深蓝 / 黑色，网格自动适配', f6:'图层管理', f6d:'多线路独立管理，拖拽调整层级',
     footerBrand:'地铁线路图绘制工具', footerGh:'GitHub', footerTry:'在线体验'
   },
   en: {
@@ -649,15 +510,15 @@ const i18n = {
     tagStation:'Station Tool · S', s1Title:'Click to Place Stations', s1Desc:'Select the station tool and click on the canvas to place stations. Drag empty areas to pan. Transfer status is auto-detected.',
     tagLine:'Line Tool · L', s2Title:'Drag to Draw Lines', s2Desc:'Drag from one station through others to form a line. Lines follow the "diagonal first, then straight" metro style, using only 0°, 45°, and 90° angles.',
     tagType:'Line Types', s3Title:'Four Line Types, Your Choice', s3Desc:'Solid, high-speed rail, hollow, and dashed lines — covering all metro cartography scenarios.',
-    typePreview:'Line Type Preview', tNormal:'Solid', tHsr:'High-speed Rail', tHollow:'Hollow', tDashed:'Dashed',
+    tNormal:'Solid', tHsr:'High-speed Rail', tHollow:'Hollow', tDashed:'Dashed',
     tagFlow:'Workflow', s4Title:'Three Steps to Your Map', s4Desc:'From blank canvas to polished result in three simple steps.',
     fl1:'Place Stations', fl1d:'Click on canvas to add stations, drag to adjust', fl2:'Connect Lines', fl2d:'Drag to link stations, choose line type and color', fl3:'Export', fl3d:'SVG / PNG / Audio, one-click download',
     tagExport:'Export', s5Title:'Bilingual, One-Click Export', s5Desc:'Export as SVG or PNG (1x–4x), with customizable legend position and bilingual legend options. Offline audio also supported.',
     exSvg:'SVG Vector', exSvgD:'Lossless scaling, ideal for print', exPng:'PNG 1x–4x', exPngD:'Multi-resolution raster for screens', exAudio:'Offline Audio', exAudioD:'Chinese & English TTS, fully local',
-    moreTitle:'More Features', moreSub:'Complete toolchain for your creation workflow',
+    tagMore:'More Features', moreTitle:'More', moreSub:'Complete toolchain for your creation workflow',
     f1:'Undo / Redo', f1d:'Full operation history with Ctrl+Z / Ctrl+Y', f2:'Zoom / Pan', f2d:'Scroll to zoom, drag to pan, fit view',
-    f3:'Multi-Format Export', f3d:'SVG / PNG (1x–4x), customizable legend', f4:'Live Bilingual Switch', f4d:'Switch between Chinese and English instantly',
-    f5:'Local Storage', f5d:'Data saved in browser localStorage, no login', f6:'Offline Audio', f6d:'Built-in meSpeak.js, local Chinese & English audio',
+    f3:'Live Bilingual Switch', f3d:'Switch between Chinese and English instantly', f4:'Local Storage', f4d:'Data saved in browser localStorage, no login',
+    f5:'Three Themes', f5d:'White / Dark Blue / Black, grid auto-adapts', f6:'Layer Management', f6d:'Manage multiple lines independently, drag to reorder',
     footerBrand:'Metro Line Map Drawing Tool', footerGh:'GitHub', footerTry:'Open App'
   }
 };
@@ -668,9 +529,10 @@ function applyLang(l){
 }
 document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
 
+// Hero 编辑器动画
 (function(){
-  const line=document.getElementById('demoLine');
-  const st=document.querySelectorAll('.demo-station');
+  const line=document.getElementById('heroLine');
+  const st=document.querySelectorAll('.hero-st');
   const len=800; line.style.strokeDasharray=len; line.style.strokeDashoffset=len;
   let s=null;
   function a(t){if(!s)s=t;const p=Math.min((t-s)/2500,1);
@@ -680,10 +542,12 @@ document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=
   setTimeout(()=>requestAnimationFrame(a),1000);
 })();
 
+// NAV 滚动隐藏
 const nav=document.getElementById('nav');let ls=0;
 window.addEventListener('scroll',()=>{const c=window.scrollY;
   nav.style.transform=(c>100&&c>ls)?'translateY(-100%)':'translateY(0)';ls=c;},{passive:true});
 
+// 入场动画
 const els=document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s,.rv-bl,.rv-fl,.rv-rl');
 const ob=new IntersectionObserver(es=>{es.forEach(e=>{
   if(e.isIntersecting&&e.intersectionRatio>=0.25){
@@ -693,13 +557,46 @@ const ob=new IntersectionObserver(es=>{es.forEach(e=>{
 });},{threshold:0.25});
 els.forEach(e=>ob.observe(e));
 
-const sv2=document.getElementById('stationSvg2');
-if(sv2){const ob2=new IntersectionObserver(es=>{es.forEach(e=>{
-  if(e.isIntersecting&&e.intersectionRatio>=0.25){
-    sv2.querySelectorAll('.st2').forEach((d,i)=>{setTimeout(()=>{d.style.opacity='1';d.style.transition='opacity .4s ease';},i*120);});
-  }
-});},{threshold:0.3});ob2.observe(sv2);}
+// ===== 独立站点弹出动画 =====
+const stStage=document.getElementById('stationStage');
+if(stStage){
+  const stObs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting&&e.intersectionRatio>=0.25){
+        const pops=stStage.querySelectorAll('.st-pop');
+        pops.forEach((g,i)=>{
+          setTimeout(()=>{g.classList.add('show');},i*300+200);
+        });
+      }else{
+        stStage.querySelectorAll('.st-pop').forEach(g=>g.classList.remove('show'));
+      }
+    });
+  },{threshold:0.25});
+  stObs.observe(stStage);
+}
 
+// ===== 线路绘制动画 =====
+const lnStage=document.getElementById('lineStage');
+if(lnStage){
+  const dl=document.getElementById('drawLine');
+  const len=dl.getTotalLength();
+  dl.style.strokeDasharray=len;
+  dl.style.strokeDashoffset=len;
+  const lnObs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting&&e.intersectionRatio>=0.25){
+        dl.style.transition='stroke-dashoffset 2s ease';
+        dl.style.strokeDashoffset='0';
+      }else{
+        dl.style.transition='none';
+        dl.style.strokeDashoffset=len;
+      }
+    });
+  },{threshold:0.25});
+  lnObs.observe(lnStage);
+}
+
+// 禁用
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('copy',e=>e.preventDefault());
 document.addEventListener('cut',e=>e.preventDefault());
