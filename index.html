@@ -411,28 +411,47 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;
 
 <!-- ===== SECTION 05: 导出 ===== -->
 <section class="sec" id="export">
-  <div class="wrap">
-    <div class="center-head">
-      <div class="mag-num rv" style="text-align:center">05</div>
-      <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span data-i18n="tagExport">导出功能</span></span></div>
-      <h2 class="sec-title rv" data-i18n="s5Title">中英双语，一键导出</h2>
-      <p class="sec-desc rv" data-i18n="s5Desc">支持 SVG / PNG（1x~4x）导出，图例位置四角可选，中英双语图例自由组合。还能生成离线报站音频，完全本地运行。</p>
+  <div class="split">
+    <div class="rv-l">
+      <div class="mag-num">05</div>
+      <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span data-i18n="tagExport">导出</span></span>
+      <h2 class="sec-title" style="text-align:left" data-i18n="s5Title">矢量与位图，双格式导出</h2>
+      <p class="sec-desc" style="text-align:left" data-i18n="s5Desc">SVG 无损矢量适合印刷出版，PNG 1x~4x 多倍率位图适配各类屏幕。图例支持四角定位，中英双语可同屏共存。</p>
     </div>
-    <div class="grid3">
-      <div class="card rv" data-d="0">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
-        <h3 data-i18n="exSvg">SVG 矢量图</h3>
-        <p data-i18n="exSvgD">无损缩放，适合印刷与出版</p>
-      </div>
-      <div class="card rv" data-d="120">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
-        <h3 data-i18n="exPng">PNG 1x~4x</h3>
-        <p data-i18n="exPngD">多倍率位图，适合屏幕展示</p>
-      </div>
-      <div class="card rv" data-d="240">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-        <h3 data-i18n="exAudio">离线报站音频</h3>
-        <p data-i18n="exAudioD">中英文语音本地生成，无需联网</p>
+    <div class="rv-r">
+      <div class="editor-mock" style="max-width:none;margin:0">
+        <div class="em-topbar"><span class="em-zoom" style="color:var(--accent);font-weight:600" data-i18n="exportPanel">导出面板</span></div>
+        <div class="em-body" style="height:300px;flex-direction:column">
+          <div style="padding:20px 24px;flex:1">
+            <div style="margin-bottom:16px"><span class="em-lh" data-i18n="format">格式</span>
+              <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+                <span style="padding:6px 16px;background:var(--accent);color:#080b14;border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap">SVG</span>
+                <span style="padding:6px 16px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-mid);border-radius:6px;font-size:12px;white-space:nowrap">PNG 1x</span>
+                <span style="padding:6px 16px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-mid);border-radius:6px;font-size:12px;white-space:nowrap">PNG 2x</span>
+                <span style="padding:6px 16px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-mid);border-radius:6px;font-size:12px;white-space:nowrap">PNG 4x</span>
+              </div>
+            </div>
+            <div style="margin-bottom:16px"><span class="em-lh" data-i18n="legend">图例</span>
+              <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
+                <span style="padding:5px 10px;background:var(--bg-2);border:1px solid var(--border-hi);border-radius:5px;font-size:11px;color:var(--text-mid);white-space:nowrap" data-i18n="legendZh">中文</span>
+                <span style="padding:5px 10px;background:var(--bg-2);border:1px solid var(--border-hi);border-radius:5px;font-size:11px;color:var(--text-mid);white-space:nowrap" data-i18n="legendEn">English</span>
+                <span style="padding:5px 10px;background:var(--bg-2);border:1px solid var(--border);border-radius:5px;font-size:11px;color:var(--text-lo);white-space:nowrap" data-i18n="legendPos">左上角</span>
+              </div>
+            </div>
+            <div><span class="em-lh" data-i18n="preview">预览</span>
+              <div style="margin-top:8px;height:80px;background:var(--bg-2);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center">
+                <svg viewBox="0 0 200 60" style="width:160px;height:48px">
+                  <path d="M20 40 L50 40 L70 20 L100 20 L120 40 L150 40 L170 20" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="butt"/>
+                  <circle cx="20" cy="40" r="4" fill="#f59e0b"/><circle cx="70" cy="20" r="4" fill="#f59e0b"/><circle cx="120" cy="40" r="4" fill="#f59e0b"/><circle cx="170" cy="20" r="4" fill="#f59e0b"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div style="padding:12px 24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:11px;color:var(--text-lo)" class="mono">SVG 1280x720</span>
+            <button style="padding:8px 20px;background:var(--accent);color:#080b14;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap" data-i18n="startDownload">开始下载</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -440,22 +459,42 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;
 
 <div class="geo-divider rv"><span class="line"></span><span class="dot"></span><span class="diamond"></span><span class="dot"></span><span class="line"></span></div>
 
-<!-- ===== SECTION 06: 更多功能（不重复前面已讲的） ===== -->
+<!-- ===== SECTION 06: 细节体验 ===== -->
 <section class="sec dark">
   <div class="wrap">
     <div class="center-head">
       <div class="mag-num rv" style="text-align:center">06</div>
-      <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="0.5" fill="currentColor"/></svg><span data-i18n="tagMore">更多功能</span></span></div>
-      <h2 class="sec-title rv" data-i18n="moreTitle">还有这些</h2>
-      <p class="sec-desc rv" data-i18n="moreSub">完整的工具链，覆盖创作全流程</p>
+      <div class="rv" style="display:inline-block"><span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="tagDetail">细节体验</span></span></div>
+      <h2 class="sec-title rv" data-i18n="moreTitle">打磨过的每一处</h2>
+      <p class="sec-desc rv" data-i18n="moreSub">不止于能用，更追求好用</p>
     </div>
-    <div class="grid3">
-      <div class="card rv" data-d="0"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg></div><h3 data-i18n="f1">撤销 / 重做</h3><p data-i18n="f1d">完整操作历史，Ctrl+Z / Ctrl+Y 自由穿梭</p></div>
-      <div class="card rv" data-d="120"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div><h3 data-i18n="f2">缩放 / 平移</h3><p data-i18n="f2d">滚轮缩放、拖拽平移、一键适应视图</p></div>
-      <div class="card rv" data-d="240"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div><h3 data-i18n="f3">双语实时切换</h3><p data-i18n="f3d">中文 / English 一键切换，全界面同步</p></div>
-      <div class="card rv" data-d="360"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div><h3 data-i18n="f4">本地存储</h3><p data-i18n="f4d">数据保存在浏览器 localStorage，无需登录</p></div>
-      <div class="card rv" data-d="480"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3 data-i18n="f5">三种主题</h3><p data-i18n="f5d">白色 / 深蓝 / 黑色，网格自动适配</p></div>
-      <div class="card rv" data-d="600"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3 data-i18n="f6">图层管理</h3><p data-i18n="f6d">多线路独立管理，拖拽调整层级</p></div>
+    <div style="max-width:680px;margin:0 auto;position:relative;padding-left:32px">
+      <div style="position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:var(--border-hi)"></div>
+      <div class="rv" data-d="0" style="position:relative;padding:20px 0 20px 32px">
+        <div style="position:absolute;left:-32px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg-1)"></div>
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:6px" data-i18n="d1t">无感撤销重做</h3>
+        <p style="font-size:14px;color:var(--text-mid);line-height:1.7;white-space:normal" data-i18n="d1d">每一步操作自动入栈，Ctrl+Z 回退、Ctrl+Y 前进，不会打断创作节奏</p>
+      </div>
+      <div class="rv" data-d="120" style="position:relative;padding:20px 0 20px 32px">
+        <div style="position:absolute;left:-32px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg-1)"></div>
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:6px" data-i18n="d2t">灵活缩放平移</h3>
+        <p style="font-size:14px;color:var(--text-mid);line-height:1.7;white-space:normal" data-i18n="d2d">滚轮无级缩放，空白处拖拽平移，一键回到适应视图，大图也能游刃有余</p>
+      </div>
+      <div class="rv" data-d="240" style="position:relative;padding:20px 0 20px 32px">
+        <div style="position:absolute;left:-32px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg-1)"></div>
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:6px" data-i18n="d3t">自动保存</h3>
+        <p style="font-size:14px;color:var(--text-mid);line-height:1.7;white-space:normal" data-i18n="d3d">所有改动实时写入浏览器本地存储，刷新不丢、断网不慌，零配置零负担</p>
+      </div>
+      <div class="rv" data-d="360" style="position:relative;padding:20px 0 20px 32px">
+        <div style="position:absolute;left:-32px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg-1)"></div>
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:6px" data-i18n="d4t">三套主题</h3>
+        <p style="font-size:14px;color:var(--text-mid);line-height:1.7;white-space:normal" data-i18n="d4d">白底清爽、深蓝护眼、纯黑沉浸，网格颜色随主题自动切换</p>
+      </div>
+      <div class="rv" data-d="480" style="position:relative;padding:20px 0 20px 32px">
+        <div style="position:absolute;left:-32px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg-1)"></div>
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:6px" data-i18n="d5t">线路角度约束</h3>
+        <p style="font-size:14px;color:var(--text-mid);line-height:1.7;white-space:normal" data-i18n="d5d">强制 0/45/90 度角，先斜后直的走线规则，画出来就是专业地铁图</p>
+      </div>
     </div>
   </div>
 </section>
@@ -492,13 +531,15 @@ const i18n = {
     tagType:'线路类型', s3Title:'四种线型，随心选择', s3Desc:'普通实线、高速铁路、空心线、虚线——覆盖地铁制图的全部场景，在属性面板一键切换。',
     tNormal:'普通线路', tHsr:'高速铁路', tHollow:'空心线', tDashed:'虚线',
     tagFlow:'创作流程', s4Title:'三步完成你的线路图', s4Desc:'从空白画布到精美成品，只需三个简单步骤。',
-    fl1:'放置站点', fl1d:'点击画布添加站点，拖拽调整位置', fl2:'连接线路', fl2d:'拖拽串联站点，选择线型与颜色', fl3:'导出成品', fl3d:'SVG / PNG / 音频，一键下载',
-    tagExport:'导出功能', s5Title:'中英双语，一键导出', s5Desc:'支持 SVG / PNG（1x~4x）导出，图例位置四角可选，中英双语图例自由组合。还能生成离线报站音频，完全本地运行。',
-    exSvg:'SVG 矢量图', exSvgD:'无损缩放，适合印刷与出版', exPng:'PNG 1x~4x', exPngD:'多倍率位图，适合屏幕展示', exAudio:'离线报站音频', exAudioD:'中英文语音本地生成，无需联网',
-    tagMore:'更多功能', moreTitle:'还有这些', moreSub:'完整的工具链，覆盖创作全流程',
-    f1:'撤销 / 重做', f1d:'完整操作历史，Ctrl+Z / Ctrl+Y 自由穿梭', f2:'缩放 / 平移', f2d:'滚轮缩放、拖拽平移、一键适应视图',
-    f3:'双语实时切换', f3d:'中文 / English 一键切换，全界面同步', f4:'本地存储', f4d:'数据保存在浏览器 localStorage，无需登录',
-    f5:'三种主题', f5d:'白色 / 深蓝 / 黑色，网格自动适配', f6:'图层管理', f6d:'多线路独立管理，拖拽调整层级',
+    fl1:'放置站点', fl1d:'点击画布添加站点，拖拽调整位置', fl2:'连接线路', fl2d:'拖拽串联站点，选择线型与颜色', fl3:'导出成品', fl3d:'SVG / PNG，一键下载',
+    tagExport:'导出', s5Title:'矢量与位图，双格式导出', s5Desc:'SVG 无损矢量适合印刷出版，PNG 1x~4x 多倍率位图适配各类屏幕。图例支持四角定位，中英双语可同屏共存。',
+    exportPanel:'导出面板', format:'格式', legend:'图例', legendZh:'中文', legendEn:'English', legendPos:'左上角', preview:'预览', startDownload:'开始下载',
+    tagDetail:'细节体验', moreTitle:'打磨过的每一处', moreSub:'不止于能用，更追求好用',
+    d1t:'无感撤销重做', d1d:'每一步操作自动入栈，Ctrl+Z 回退、Ctrl+Y 前进，不会打断创作节奏',
+    d2t:'灵活缩放平移', d2d:'滚轮无级缩放，空白处拖拽平移，一键回到适应视图，大图也能游刃有余',
+    d3t:'自动保存', d3d:'所有改动实时写入浏览器本地存储，刷新不丢、断网不慌，零配置零负担',
+    d4t:'三套主题', d4d:'白底清爽、深蓝护眼、纯黑沉浸，网格颜色随主题自动切换',
+    d5t:'线路角度约束', d5d:'强制 0/45/90 度角，先斜后直的走线规则，画出来就是专业地铁图',
     footerBrand:'地铁线路图绘制工具', footerGh:'GitHub', footerTry:'在线体验'
   },
   en: {
@@ -512,13 +553,15 @@ const i18n = {
     tagType:'Line Types', s3Title:'Four Line Types, Your Choice', s3Desc:'Solid, high-speed rail, hollow, and dashed lines — covering all metro cartography scenarios.',
     tNormal:'Solid', tHsr:'High-speed Rail', tHollow:'Hollow', tDashed:'Dashed',
     tagFlow:'Workflow', s4Title:'Three Steps to Your Map', s4Desc:'From blank canvas to polished result in three simple steps.',
-    fl1:'Place Stations', fl1d:'Click on canvas to add stations, drag to adjust', fl2:'Connect Lines', fl2d:'Drag to link stations, choose line type and color', fl3:'Export', fl3d:'SVG / PNG / Audio, one-click download',
-    tagExport:'Export', s5Title:'Bilingual, One-Click Export', s5Desc:'Export as SVG or PNG (1x–4x), with customizable legend position and bilingual legend options. Offline audio also supported.',
-    exSvg:'SVG Vector', exSvgD:'Lossless scaling, ideal for print', exPng:'PNG 1x–4x', exPngD:'Multi-resolution raster for screens', exAudio:'Offline Audio', exAudioD:'Chinese & English TTS, fully local',
-    tagMore:'More Features', moreTitle:'More', moreSub:'Complete toolchain for your creation workflow',
-    f1:'Undo / Redo', f1d:'Full operation history with Ctrl+Z / Ctrl+Y', f2:'Zoom / Pan', f2d:'Scroll to zoom, drag to pan, fit view',
-    f3:'Live Bilingual Switch', f3d:'Switch between Chinese and English instantly', f4:'Local Storage', f4d:'Data saved in browser localStorage, no login',
-    f5:'Three Themes', f5d:'White / Dark Blue / Black, grid auto-adapts', f6:'Layer Management', f6d:'Manage multiple lines independently, drag to reorder',
+    fl1:'Place Stations', fl1d:'Click on canvas to add stations, drag to adjust', fl2:'Connect Lines', fl2d:'Drag to link stations, choose line type and color', fl3:'Export', fl3d:'SVG / PNG, one-click download',
+    tagExport:'Export', s5Title:'Vector and Raster, Dual Format', s5Desc:'SVG lossless vector for print, PNG 1x-4x multi-resolution for screens. Legend supports four-corner placement with bilingual options.',
+    exportPanel:'Export Panel', format:'Format', legend:'Legend', legendZh:'Chinese', legendEn:'English', legendPos:'Top Left', preview:'Preview', startDownload:'Download',
+    tagDetail:'Details', moreTitle:'Crafted to Perfection', moreSub:'Not just usable, but enjoyable',
+    d1t:'Seamless Undo / Redo', d1d:'Every action auto-stacked, Ctrl+Z back, Ctrl+Y forward, never breaks your flow',
+    d2t:'Flexible Zoom & Pan', d2d:'Smooth scroll zoom, drag to pan, one-click fit view, handles large maps with ease',
+    d3t:'Auto Save', d3d:'All changes saved to browser localStorage instantly, refresh-proof, zero config',
+    d4t:'Three Themes', d4d:'Clean white, eye-care dark blue, immersive black, grid auto-adapts',
+    d5t:'Angle Constraint', d5d:'Enforces 0/45/90 degree angles, diagonal-first routing for professional results',
     footerBrand:'Metro Line Map Drawing Tool', footerGh:'GitHub', footerTry:'Open App'
   }
 };
